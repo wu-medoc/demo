@@ -6,13 +6,13 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
+import { swiperDemoComponent } from './swiperDemo/swiperDemo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    swiperDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +21,7 @@ import { AboutComponent } from './about/about.component';
     RouterModule.forRoot([
       { path: '', pathMatch: 'full', redirectTo: '/enter-leave' },
       { path: 'home', component: HomeComponent, data: {animation: 'HomePage'} },
-      { path: 'about', component: AboutComponent, data: {animation: 'AboutPage'} },
+      { path: 'swiperDemo', component: swiperDemoComponent, data: {animation: 'swiperDemoPage'} },
     ])  
   ],
   providers: [],

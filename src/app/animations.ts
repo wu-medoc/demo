@@ -15,7 +15,7 @@ export const transAnimation = animation([
 // Routable animations
 export const slideInAnimation =
   trigger('routeAnimations', [
-    transition('HomePage <=> AboutPage', [
+    transition('HomePage <=> swiperDemoPage', [
       style({ position: 'relative' }),
       query(':enter, :leave', [
         style({

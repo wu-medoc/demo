@@ -1,11 +1,17 @@
 <div class="container">
-  <h1>Animations</h1>
+  <h1>mobii Angular demo</h1>
 
   Toggle All Animations <input type="checkbox" [checked]="!animationsDisabled" (click)="toggleAnimations()"/>
 
   <nav>
-    <a id="home" routerLink="/home" routerLinkActive="active" class="p-2">Home</a>
-    <a id="about" routerLink="/about" routerLinkActive="active" class="p-2">About</a>
+    <ul class="nav nav-pills">       
+      <li class="nav-item m-1 p-2 bg-light border-radius5">
+        <a id="home" routerLink="/home" routerLinkActive="active">Home</a>
+      </li>    
+      <li class="nav-item m-1 p-2 bg-light border-radius5">
+        <a id="swiperDemo" routerLink="/swiperDemo" routerLinkActive="active">swiperDemo</a>
+      </li>
+    </ul>
     <!-- <a id="open-close" routerLink="/open-close" routerLinkActive="active">Open/Close</a>
     <a id="status" routerLink="/status" routerLinkActive="active">Status Slider</a>
     <a id="toggle" routerLink="/toggle" routerLinkActive="active">Toggle Animations</a>
