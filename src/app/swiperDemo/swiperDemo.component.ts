@@ -4,9 +4,7 @@ import { swiperImg } from './swiperImg';
 import { boxtabsData } from './boxtabsData';
 import { SwiperOptions } from 'swiper';
 
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { RouterOutlet } from '@angular/router';
-import { slideInAnimationTab } from './../animations';
+import { slideInAnimation } from './../animations';
 
 declare var $: any;
 
@@ -14,21 +12,10 @@ declare var $: any;
   selector: 'app-swiperDemo',
   templateUrl: './swiperDemo.component.html',
   styleUrls: ['./swiperDemo.component.css'],  
-  animations: [ slideInAnimationTab ]
+  animations: [ slideInAnimation ]
 })
 
 export class swiperDemoComponent implements OnInit {
-  /** 動畫換頁 */
-  @HostBinding('@.disabled')
-  public animationsDisabled = false;
-  
-  prepareRoute1(outlet1: RouterOutlet) {
-    return outlet1 && outlet1.activatedRouteData && outlet1.activatedRouteData['animation'];
-  }
-
-  toggleAnimations() {
-    this.animationsDisabled = !this.animationsDisabled;
-  }  
 
   /** 列表選單 */
   public boxTabs : SwiperOptions = {
