@@ -1,11 +1,12 @@
 import { OnInit, Component, HostBinding } from '@angular/core';
 import Swiper from "swiper";
 import { swiperImg } from './swiperImg';
+import { boxtabsData } from './boxtabsData';
 import { SwiperOptions } from 'swiper';
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { RouterOutlet } from '@angular/router';
-import { slideInAnimation } from './../animations';
+import { slideInAnimationTab } from './../animations';
 
 declare var $: any;
 
@@ -13,7 +14,7 @@ declare var $: any;
   selector: 'app-swiperDemo',
   templateUrl: './swiperDemo.component.html',
   styleUrls: ['./swiperDemo.component.css'],  
-  animations: [ slideInAnimation ]
+  animations: [ slideInAnimationTab ]
 })
 
 export class swiperDemoComponent implements OnInit {
@@ -21,8 +22,8 @@ export class swiperDemoComponent implements OnInit {
   @HostBinding('@.disabled')
   public animationsDisabled = false;
   
-  prepareRoute1(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  prepareRoute1(outlet1: RouterOutlet) {
+    return outlet1 && outlet1.activatedRouteData && outlet1.activatedRouteData['animation'];
   }
 
   toggleAnimations() {
@@ -50,8 +51,13 @@ export class swiperDemoComponent implements OnInit {
     }
   };
 
-  /** 大看板內容 */
+  /** 
+   * 內容引入
+   * swiperImg 廣告圖
+   * boxtabsData 列表內容及連結
+   */
   slides = swiperImg;
+  slidestab = boxtabsData;
 
   /** 大看板 */
   public boxKV : SwiperOptions = {

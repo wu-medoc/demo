@@ -18,22 +18,18 @@
 
 <h5 class="pt-5">swiper tablist</h5>
 <div class="afp-tab-box">
-    <div class="afp-tab mb-5">
+    <div class="afp-tab">
         <swiper class="nav-tabs-box swiper-container" [config]="boxTabs">
             <ul id="nav-tab-member" class="swiper-wrapper nav nav-tabs mb-2" role="tablist">
-                <li class="swiper-slide" role="presentation">
-                    <a id="roaming" class="tablist-link active" routerLink="/Roaming" routerLinkActive="active">roaming</a>
-                </li>
-                <li class="swiper-slide" role="presentation">
-                    <a id="notify" class="tablist-link" routerLink="/Notify" routerLinkActive="active">notify</a>
-                </li>
-                <li class="swiper-slide" role="presentation">
-                    <a id="roaming1" class="tablist-link" routerLink="/Roaming" routerLinkActive="active">roaming1</a>
+                <li class="swiper-slide" role="presentation" *ngFor="let itemtab of slidestab; let First = first; let i = index">
+                    <a id="{{itemtab.linkTitle}}" class="tablist-link" [ngClass]="{'active show': First}" routerLink="{{itemtab.routerLink}}" routerLinkActive="active">{{itemtab.linkTitle}}</a>
                 </li>
             </ul>
         </swiper>
     </div>
-</div>
-<div [@routeAnimations]="prepareRoute1(outlet)" >
-    <router-outlet #outlet1="outlet"></router-outlet>
+    <div class="tab-content border-t mb-5">
+        <div [@routeAnimationsTab]="prepareRoute1(outlet1)" >
+            <router-outlet #outlet="outlet"></router-outlet>
+        </div>
+    </div>
 </div>
