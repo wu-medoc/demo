@@ -1,8 +1,5 @@
 <div class="container">
-  <h1>Angular demo</h1>
-
-  <!-- Toggle All Animations <input type="checkbox" [checked]="!animationsDisabled" (click)="toggleAnimations()"/> -->
-
+<h1>Angular demo</h1>
   <nav>
     <ul class="nav nav-pills">       
       <li class="nav-item m-1 p-2 bg-light border-radius5">
@@ -14,6 +11,12 @@
       <li class="nav-item m-1 p-2 bg-light border-radius5">
         <a id="heroTest" routerLink="/heroTest" routerLinkActive="active">heroTest</a>
       </li>
+      <li class="nav-item m-1 p-2 bg-light border-radius5">
+        <a id="roaming" routerLink="/roaming" routerLinkActive="active">roaming</a>
+      </li>
+      <li class="nav-item m-1 p-2 bg-light border-radius5">
+        <a id="notify" routerLink="/notify" routerLinkActive="active">notify</a>
+      </li>
     </ul>
   </nav>
 
@@ -21,6 +24,7 @@
     <router-outlet #outlet="outlet"></router-outlet>
   </div>
 </div>
+
 
 <!-- <style>
   :host {
