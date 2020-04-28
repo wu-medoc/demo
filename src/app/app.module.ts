@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,7 +34,15 @@ import { NotifyComponent } from './notify/notify.component';
       { path: 'heroTest', component: HeroTestComponent, data: {animation: 'heroTestPage'} },
       { path: 'roaming', component: RoamingComponent, data: {animation: 'roamingPage'} },
       { path: 'notify', component: NotifyComponent, data: {animation: 'notifyPage'} }
-    ])  
+    ]),
+    NgCircleProgressModule.forRoot({
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
