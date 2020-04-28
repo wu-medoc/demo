@@ -1,6 +1,17 @@
 <div class="container">
 <h1>Angular demo</h1>
-  <nav>
+<div class="afp-tab-box">
+  <div class="afp-tab">
+      <swiper class="nav-tabs-box swiper-container" [config]="boxTabs">
+          <ul id="nav-tab-member" class="swiper-wrapper nav nav-tabs mb-2" role="tablist">
+              <li class="swiper-slide" role="presentation" *ngFor="let itemtab of slidestab; let First = first; let i = index" [ngClass]="{'active': blFirst}">
+                  <a id="{{itemtab.linkTitle}}" class="tablist-link" [ngClass]="{'active': blFirst}" routerLink="{{itemtab.routerLink}}" routerLinkActive="active">{{itemtab.linkTitle}}</a>
+              </li>
+          </ul>
+      </swiper>
+  </div>
+</div>
+  <!-- <nav>
     <ul class="nav nav-pills">       
       <li class="nav-item m-1 p-2 bg-light border-radius5">
         <a id="home" routerLink="/home" routerLinkActive="active">Home</a>
@@ -18,7 +29,7 @@
         <a id="notify" routerLink="/notify" routerLinkActive="active">notify</a>
       </li>
     </ul>
-  </nav>
+  </nav> -->
 
   <div [@routeAnimations]="prepareRoute(outlet)" >
     <router-outlet #outlet="outlet"></router-outlet>
