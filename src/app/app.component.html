@@ -5,7 +5,7 @@
         <swiper class="nav-tabs-box swiper-container" [config]="boxTabs">
             <ul id="nav-tab-member" class="swiper-wrapper nav nav-tabs mb-2" role="tablist">
                 <li class="swiper-slide" role="presentation" *ngFor="let itemtab of slidestab; let blFirst = first; let i = index" [ngClass]="{'active': blFirst}">
-                    <a id="{{itemtab.linkTitle}}" class="tablist-link" [ngClass]="{'active': blFirst}" routerLink="{{itemtab.routerLink}}" routerLinkActive="active">{{itemtab.linkTitle}}</a>
+                    <a id="{{itemtab.linkTitle}}" class="tablist-link show" [ngClass]="{'active': blFirst}" routerLink="{{itemtab.routerLink}}" routerLinkActive="active">{{itemtab.linkTitle}}</a>
                 </li>
             </ul>
         </swiper>

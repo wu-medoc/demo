@@ -2,6 +2,15 @@ import { Component, HostBinding, OnInit } from '@angular/core';
 import { trigger, transition, animate, style, query, stagger } from '@angular/animations';
 import { HEROES } from './mock-heroes';
 
+import { Observable, Subject } from 'rxjs';
+import {
+  debounceTime, distinctUntilChanged, switchMap
+} from 'rxjs/operators';
+
+import { Hero } from './hero';
+import { HeroService } from '../hero.service';
+//import { AppRoutingModule } from '../app-routing.module';
+
 @Component({
   selector: 'app-heroTest',
   templateUrl: './heroTest.component.html',
@@ -38,6 +47,12 @@ import { HEROES } from './mock-heroes';
   ]
 })
 export class HeroTestComponent implements OnInit {
+
+  //heromenu = AppRoutingModule;
+  
+  heroes$: Observable<Hero[]>;
+  private searchTerms = new Subject<string>();
+
   @HostBinding('@pageAnimations')
   public animatePage = true;
 
@@ -47,12 +62,24 @@ export class HeroTestComponent implements OnInit {
     return this._heroes;
   }
 
-  constructor() { }
-
-  ngOnInit() {
-    this._heroes = HEROES;    
+  constructor(private heroService: HeroService) {}
+  search(term: string): void {
+    this.searchTerms.next(term);
   }
 
+  ngOnInit(): void {
+    this._heroes = HEROES;   
+    this.heroes$ = this.searchTerms.pipe(
+      // wait 300ms after each keystroke before considering the term
+      debounceTime(300),
+
+      // ignore new term if same as previous term
+      distinctUntilChanged(),
+
+      // switch to new search observable each time the term changes
+      switchMap((term: string) => this.heroService.searchHeroes(term)),
+    );
+  }
   updateCriteria(criteria: string) {
     criteria = criteria ? criteria.trim() : '';
 
