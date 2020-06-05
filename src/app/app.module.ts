@@ -9,18 +9,19 @@ import { FormsModule }    from '@angular/forms';
 // 引用記憶體Web API(In-memory Web API)所需類別及Service
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { InMemoryDataService } from './hero/in-memory-data.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { swiperDemoComponent } from './swiperDemo/swiperDemo.component';
-import { HeroTestComponent } from './heroTest/heroTest.component';
+import { HeroTestComponent } from './hero/heroTest/heroTest.component';
+import { HeroMenuComponent } from './hero/hero-menu/hero-menu.component';
 import { RoamingComponent } from './roaming/roaming.component';
 import { NotifyComponent } from './notify/notify.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
-import { MessagesComponent }    from './messages/messages.component';
-import { HeroesComponent } from './heroes/heroes.component';
+import { HeroDetailComponent } from './hero/hero-detail/hero-detail.component';
+import { MessagesComponent }    from './hero/messages/messages.component';
+import { HeroesComponent } from './hero/heroes/heroes.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { HeroesComponent } from './heroes/heroes.component';
     HeroDetailComponent,
     MessagesComponent,
     HeroesComponent,
+    HeroMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,7 @@ import { HeroesComponent } from './heroes/heroes.component';
       { path: '', pathMatch: 'full', redirectTo: '/' },
       { path: 'home', component: HomeComponent, data: {animation: 'HomePage'} },
       { path: 'swiperDemo', component: swiperDemoComponent, data: {animation: 'swiperDemoPage'} },
-      { path: 'heroTest', component: HeroTestComponent, data: {animation: 'heroTestPage'} },
+      { path: 'hero', component: HeroMenuComponent },
       { path: 'roaming', component: RoamingComponent, data: {animation: 'roamingPage'} },
       { path: 'notify', component: NotifyComponent, data: {animation: 'notifyPage'} }
     ]),

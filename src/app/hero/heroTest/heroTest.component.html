@@ -1,13 +1,3 @@
-<!-- <ul class="nav">
-    <li class="nav-item" *ngFor="let item of heromenu; let blFirst = first">
-        <a class="nav-link" [ngClass]="{'active': blFirst}" href="#" [routerLink]="[item.routerLink]" routerLinkActive="active">{{item.routerLink}}</a>
-    </li>
-</ul> -->
-<nav>
-    <a routerLink="/HeroTest" class="m-2">HeroTest</a>
-    <a routerLink="/heroes" class="m-2">Heroes</a>
-</nav>
-
 <form>
     <input #criteria (input)="updateCriteria(criteria.value)" placeholder="Search Heroes" />
 </form>    

@@ -1,15 +1,14 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { trigger, transition, animate, style, query, stagger } from '@angular/animations';
-import { HEROES } from './mock-heroes';
+import { HEROES } from '../heroes/mock-heroes';
 
 import { Observable, Subject } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 
-import { Hero } from './hero';
+import { Hero } from '../heroes/hero';
 import { HeroService } from '../hero.service';
-//import { AppRoutingModule } from '../app-routing.module';
 
 @Component({
   selector: 'app-heroTest',
@@ -48,8 +47,6 @@ import { HeroService } from '../hero.service';
 })
 export class HeroTestComponent implements OnInit {
 
-  //heromenu = AppRoutingModule;
-  
   heroes$: Observable<Hero[]>;
   private searchTerms = new Subject<string>();
 
