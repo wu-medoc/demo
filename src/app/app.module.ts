@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { FormsModule }    from '@angular/forms';
@@ -11,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './hero/in-memory-data.service';
 
+import { HeroRoutingModule }    from './hero/hero-routing.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -38,6 +38,7 @@ import { HeroesComponent } from './hero/heroes/heroes.component';
   ],
   imports: [
     BrowserModule,
+    HeroRoutingModule,
     AppRoutingModule,
     BrowserAnimationsModule,    
     NgxUsefulSwiperModule,
@@ -46,14 +47,6 @@ import { HeroesComponent } from './hero/heroes/heroes.component';
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     ),
-    RouterModule.forRoot([
-      { path: '', pathMatch: 'full', redirectTo: '/' },
-      { path: 'home', component: HomeComponent, data: {animation: 'HomePage'} },
-      { path: 'swiperDemo', component: swiperDemoComponent, data: {animation: 'swiperDemoPage'} },
-      { path: 'hero', component: HeroMenuComponent },
-      { path: 'roaming', component: RoamingComponent, data: {animation: 'roamingPage'} },
-      { path: 'notify', component: NotifyComponent, data: {animation: 'notifyPage'} }
-    ]),
     NgCircleProgressModule.forRoot({
       radius: 20,
       space: -6,

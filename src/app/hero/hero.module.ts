@@ -2,7 +2,7 @@ import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
 import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
 import { HeroesComponent } from './heroes/heroes.component';
-import { HeroTestComponent } from './HeroTest/HeroTest.component';
+import { HeroTestComponent } from './HeroTest/heroTest.component';
 
 import { HeroRoutingModule } from './hero-routing.module';
 import { HeroMenuComponent } from './hero-menu/hero-menu.component';

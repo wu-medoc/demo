@@ -1,6 +1,5 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { trigger, transition, animate, style, query, stagger } from '@angular/animations';
-import { HEROES } from '../heroes/mock-heroes';
 
 import { Observable, Subject } from 'rxjs';
 import {
@@ -9,6 +8,7 @@ import {
 
 import { Hero } from '../heroes/hero';
 import { HeroService } from '../hero.service';
+import { HEROES } from '../heroes/mock-heroes';
 
 @Component({
   selector: 'app-heroTest',
@@ -59,7 +59,9 @@ export class HeroTestComponent implements OnInit {
     return this._heroes;
   }
 
-  constructor(private heroService: HeroService) {}
+  constructor(
+    private heroService: HeroService
+    ) {}
   search(term: string): void {
     this.searchTerms.next(term);
   }
