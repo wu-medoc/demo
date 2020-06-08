@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule }    from '@angular/forms';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { NgCircleProgressModule } from 'ng-circle-progress';
-import { FormsModule }    from '@angular/forms';
 
 // 引用記憶體Web API(In-memory Web API)所需類別及Service
 import { HttpClientModule } from '@angular/common/http';

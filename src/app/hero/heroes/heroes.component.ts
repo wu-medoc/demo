@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }       from '@angular/router';
 
 import { Hero } from './hero';
 import { HeroService } from '../hero.service';
@@ -13,7 +12,6 @@ export class HeroesComponent implements OnInit {
   heroes: Hero[];
 
   constructor(
-    private route: ActivatedRoute,
     private heroService: HeroService) { }
 
   ngOnInit() {

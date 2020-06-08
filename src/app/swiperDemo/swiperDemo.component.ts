@@ -33,6 +33,7 @@ export class swiperDemoComponent implements OnInit {
     spaceBetween: 30,
     autoplay: true
   };
+  
   constructor() {}
 
   ngAfterViewInit() {   
