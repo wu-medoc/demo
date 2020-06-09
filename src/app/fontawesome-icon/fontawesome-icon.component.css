@@ -1,0 +1,7 @@
+.grid-wrap{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    grid-gap: 10px;
+    justify-content: center;
+    margin-bottom: 1em;
+}

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RoamingComponent } from './roaming.component';
+import { FontawesomeIconComponent } from './fontawesome-icon.component';
 
-describe('RoamingComponent', () => {
-  let component: RoamingComponent;
-  let fixture: ComponentFixture<RoamingComponent>;
+describe('FontawesomeIconComponent', () => {
+  let component: FontawesomeIconComponent;
+  let fixture: ComponentFixture<FontawesomeIconComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RoamingComponent ]
+      declarations: [ FontawesomeIconComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RoamingComponent);
+    fixture = TestBed.createComponent(FontawesomeIconComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

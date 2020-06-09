@@ -7,8 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { swiperDemoComponent } from './swiperDemo/swiperDemo.component';
 import { HeroTestComponent } from './hero/heroTest/heroTest.component';
 import { HeroMenuComponent } from './hero/hero-menu/hero-menu.component';
-import { RoamingComponent } from './roaming/roaming.component';
-import { NotifyComponent } from './notify/notify.component';
+import { formUIComponent } from './formUI/formUI.component';
+import { FontawesomeIconComponent } from './fontawesome-icon/fontawesome-icon.component';
 import { HeroDetailComponent } from './hero/hero-detail/hero-detail.component';
 import { MessagesComponent }    from './hero/messages/messages.component';
 import { HeroesComponent } from './hero/heroes/heroes.component';
@@ -17,8 +17,8 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent, data: {animation: 'HomePage'} },
   { path: 'swiperDemo', component: swiperDemoComponent, data: {animation: 'swiperDemoPage'} },
-  { path: 'roaming', component: RoamingComponent, data: {animation: 'roamingPage'} },
-  { path: 'notify', component: NotifyComponent, data: {animation: 'notifyPage'} },
+  { path: 'formUI', component: formUIComponent, data: {animation: 'formUIPage'} },
+  { path: 'fontawesomeIcon', component: FontawesomeIconComponent, data: {animation: 'fontawesomeIconPage'} },
 ];
 
 @NgModule({
