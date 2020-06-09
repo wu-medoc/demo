@@ -26,7 +26,7 @@ export const slideInAnimation =
         })
       ], {optional: true}),
       query(':enter', [
-        style({ left: '-100%'})
+        style({ left: '200%'})
       ], {optional: true}),
       query(':leave', animateChild(), {optional: true}),
       group([

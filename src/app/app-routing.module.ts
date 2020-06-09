@@ -17,7 +17,6 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent, data: {animation: 'HomePage'} },
   { path: 'swiperDemo', component: swiperDemoComponent, data: {animation: 'swiperDemoPage'} },
-  //{ path: 'hero', component: HeroMenuComponent, data: {animation: 'HeroMenuPage'} },
   { path: 'roaming', component: RoamingComponent, data: {animation: 'roamingPage'} },
   { path: 'notify', component: NotifyComponent, data: {animation: 'notifyPage'} },
 ];
