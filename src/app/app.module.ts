@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
+
+// 引用 intl-tel-input 插件
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 // 引用FontAwesome
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
@@ -55,7 +59,10 @@ import { FontawesomeIconComponent } from './fontawesome-icon/fontawesome-icon.co
     AppRoutingModule,
     BrowserAnimationsModule,    
     NgxUsefulSwiperModule,
+    BsDropdownModule.forRoot(),
+    NgxIntlTelInputModule,
     FormsModule,    
+    ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(

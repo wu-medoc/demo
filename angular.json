@@ -25,7 +25,8 @@
               "src/img"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",              
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",   
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",           
               "node_modules/swiper/css/swiper.min.css",
               "src/dist/style/css.min.css",
               "src/dist/style/global.min.css",
