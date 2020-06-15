@@ -35,3 +35,11 @@
 :host ::ng-deep .intl-tel-input.separate-dial-code .selected-flag{
     background-color: #ffffff;
 }
+
+:host ::ng-deep .country-list{
+    font-size: small;
+}
+
+:host ::ng-deep .dropdown-menu{
+    min-width: 13rem;
+}
