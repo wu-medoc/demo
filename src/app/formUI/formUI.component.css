@@ -1,0 +1,37 @@
+.input-group-text, .custom-select, .form-control{
+    background-color: #ffffff;
+    border: none;
+    border-bottom: 1px solid #ced4da;
+}
+
+
+/* ngx-intl-tel-input */
+.ngx-tel{
+    width: 100%;
+    margin-bottom: 1em;
+}
+.ngx-tel>ngx-intl-tel-input{
+    width: 100%;
+    display: inline-grid;
+}
+
+:host ::ng-deep .ngx-tel .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.4375rem 0;
+    font-size: 1rem;
+    line-height: 1.5;    
+    margin: 0px 5px;
+    color: #495057;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    border-radius: 0;
+    box-shadow: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+}
+:host ::ng-deep .intl-tel-input.separate-dial-code .selected-flag{
+    background-color: #ffffff;
+}

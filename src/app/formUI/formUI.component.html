@@ -34,6 +34,24 @@
                 </select>
                 <input name="" class="form-control" placeholder="Phone number" type="text">
             </div> <!-- form-group// -->
+            <div #f="ngForm" [formGroup]="phoneForm" class="ngx-tel">
+                  <ngx-intl-tel-input 
+                    [inputId]="'phonecode'"
+                    [cssClass]="'form-control'" 
+                    [preferredCountries]="preferredCountries"
+                    [enableAutoCountrySelect]="false" 
+                    [enablePlaceholder]="true" 
+                    [searchCountryFlag]="true"
+                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                    [selectFirstCountry]="false" 
+                    [selectedCountryISO]="CountryISO.Taiwan"
+                    [maxLength]="15" 
+                    [tooltipField]="TooltipLabel.Name" 
+                    [phoneValidation]="true" 
+                    [separateDialCode]="separateDialCode"
+                    name="phone" formControlName="phone">
+                  </ngx-intl-tel-input>
+            </div>
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <fa-icon [icon]="['fas', 'building']"></fa-icon> </span>
@@ -71,14 +89,14 @@
     </article>
 </div> <!-- card.// -->
 
-<div style="margin: 50px">
+<!-- <div style="margin: 50px" class="ngx-tel">
     <h3>Test International Telephone Input Form</h3>
     <br>
     <div class="mb-2">
       <button (click)="changePreferredCountries()">Change Preferred Countries</button>
     </div>
     <div class="mb-2">
-      <input type="checkbox" [(ngModel)]="separateDialCode" class="form-control">
+      <input type="checkbox" [(ngModel)]="separateDialCode">
       <label>&nbsp;Separate Dial Code?</label>
     </div>
     <form #f="ngForm" [formGroup]="phoneForm">
@@ -92,7 +110,7 @@
           [searchCountryFlag]="true"
           [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
           [selectFirstCountry]="false" 
-          [selectedCountryISO]="CountryISO.India"
+          [selectedCountryISO]="CountryISO.Taiwan"
           [maxLength]="15" 
           [tooltipField]="TooltipLabel.Name" 
           [phoneValidation]="true" 
@@ -110,4 +128,4 @@
     <div><strong>Is form valid:</strong> <pre>{{ f.form.valid }}</pre></div>
     <div><strong>Form value:</strong> <pre>{{ f.form.value | json }}</pre></div>
     <div><strong>Form validation errors:</strong> <pre>{{ f.form.controls['phone'].errors | json }}</pre></div>
-  </div>
+</div> -->

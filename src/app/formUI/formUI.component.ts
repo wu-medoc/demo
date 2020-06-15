@@ -22,7 +22,7 @@ export class formUIComponent implements OnInit {
 	SearchCountryField = SearchCountryField;
 	TooltipLabel = TooltipLabel;
 	CountryISO = CountryISO;
-	preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
+	preferredCountries: CountryISO[] = [CountryISO.Taiwan, CountryISO.HongKong, CountryISO.UnitedStates, CountryISO.UnitedKingdom];
 	phoneForm = new FormGroup({
 		phone: new FormControl(undefined, [Validators.required])
 	});
