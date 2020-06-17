@@ -19,6 +19,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './hero/in-memory-data.service';
 
 //Routing Module
+import { AnimRoutingModule }    from './anim-layer/anim-routing.module';
 import { HeroRoutingModule }    from './hero/hero-routing.module';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -39,6 +40,8 @@ import { HeroDetailComponent } from './hero/hero-detail/hero-detail.component';
 import { MessagesComponent }    from './hero/messages/messages.component';
 import { HeroesComponent } from './hero/heroes/heroes.component';
 import { FontawesomeIconComponent } from './fontawesome-icon/fontawesome-icon.component';
+import { AnimLayerComponent } from './anim-layer/anim-layer.component';
+import { AnimDetailComponent } from './anim-layer/anim-detail.component';
 
 @NgModule({
   declarations: [
@@ -52,9 +55,12 @@ import { FontawesomeIconComponent } from './fontawesome-icon/fontawesome-icon.co
     HeroesComponent,
     HeroMenuComponent,
     FontawesomeIconComponent,
+    AnimLayerComponent,
+    AnimDetailComponent,
   ],
   imports: [
     BrowserModule,
+    AnimRoutingModule,
     HeroRoutingModule,
     AppRoutingModule,
     BrowserAnimationsModule,    

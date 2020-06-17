@@ -1,0 +1,13 @@
+<p>anim-layer</p>
+<div class="mylayers">
+    <div *ngFor="let anlayer of layerData">
+      <a routerLink="/animLayer/{{anlayer.id}}" (click)="toggle()">
+        <span class="badge">{{anlayer.id}}</span> {{anlayer.name}}
+      </a>
+    </div>
+</div>
+<div>
+  <ng-container *ngFor="let anlayer of layerData">
+    <div @layerTrigger *ngIf="anlayer.id == this.prodId" >This is a {{anlayer.name}}.</div>
+  </ng-container>
+</div>
