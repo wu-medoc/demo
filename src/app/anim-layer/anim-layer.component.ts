@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { slideInAnimation } from '../animations';
-import { trigger, transition, state, animate, style, AnimationEvent, query, stagger } from '@angular/animations';
+import { trigger, transition, animate, style } from '@angular/animations';
 import { Anlayer } from './anlayer';
-import { Router, ActivatedRoute, Params, RouterOutlet } from '@angular/router';
+import { Router, ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-anim-layer',
