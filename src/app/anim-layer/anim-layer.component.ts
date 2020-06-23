@@ -11,12 +11,12 @@ import { Router, ActivatedRoute, Params} from '@angular/router';
   animations: [ slideInAnimation,
     trigger('layerTrigger', [
       transition(':enter', [
-        style({position: 'absolute', transform: 'translateX(100%)'}),
-        animate('300ms ease-out', style({transform: 'translateX(0%)'}))
+        style({position: 'absolute', transform: 'translateX(100%)', opacity: '0.5'}),
+        animate('400ms ease-in-out', style({transform: 'translateX(0%)', opacity: '1'}))
       ]),
       transition(':leave', [
-        style({position: 'absolute', transform: 'translateX(0%)'}),
-        animate('300ms ease-in', style({transform: 'translateX(100%)'}))
+        style({position: 'absolute', transform: 'translateX(0%)', opacity: '0.3'}),
+        animate('400ms ease-in-out', style({transform: 'translateX(100%)', opacity: '0'}))
       ])
     ]),
   ]
