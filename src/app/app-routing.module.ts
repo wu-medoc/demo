@@ -11,7 +11,7 @@ import { formUIComponent } from './formUI/formUI.component';
 import { FontawesomeIconComponent } from './fontawesome-icon/fontawesome-icon.component';
 import { HeroDetailComponent } from './hero/hero-detail/hero-detail.component';
 import { MessagesComponent }    from './hero/messages/messages.component';
-import { HeroesComponent } from './hero/heroes/heroes.component';
+import { TempleateComponent } from './templeate/templeate.component';
 import { AnimLayerComponent } from './anim-layer/anim-layer.component';
 
 
@@ -22,6 +22,8 @@ const routes: Routes = [
   { path: 'animLayer', component: AnimLayerComponent, data: {animation: 'animLayerPage'} },
   { path: 'formUI', component: formUIComponent, data: {animation: 'formUIPage'} },
   { path: 'icon', component: FontawesomeIconComponent, data: {animation: 'fontawesomeIconPage'} },
+  { path: 'heroExp', component: HeroTestComponent, data: {animation: 'heroPage'} },
+  { path: 'templeate', component: TempleateComponent, data: {animation: 'tempPage'} },
 ];
 
 @NgModule({

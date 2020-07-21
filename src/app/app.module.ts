@@ -42,6 +42,7 @@ import { HeroesComponent } from './hero/heroes/heroes.component';
 import { FontawesomeIconComponent } from './fontawesome-icon/fontawesome-icon.component';
 import { AnimLayerComponent } from './anim-layer/anim-layer.component';
 import { AnimDetailComponent } from './anim-layer/anim-detail.component';
+import { TempleateComponent } from './templeate/templeate.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { AnimDetailComponent } from './anim-layer/anim-detail.component';
     FontawesomeIconComponent,
     AnimLayerComponent,
     AnimDetailComponent,
+    TempleateComponent,
   ],
   imports: [
     BrowserModule,

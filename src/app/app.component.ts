@@ -38,10 +38,11 @@ export class AppComponent {
 
   slidestab = boxtabsData;
 
-  
+ 
   /** 頁面切換 */
   @HostBinding('@.disabled')
   public animationsDisabled = false;
+  public transX = '';
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
@@ -51,3 +52,4 @@ export class AppComponent {
     this.animationsDisabled = !this.animationsDisabled;
   }  
 }
+

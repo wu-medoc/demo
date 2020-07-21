@@ -6,7 +6,7 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroMenuComponent } from './hero-menu/hero-menu.component';
 
 const routes: Routes = [
-  { path: 'heroExp', component: HeroTestComponent },  
+  { path: 'heroExp', component: HeroTestComponent, data: { animation: 'heroPage' } },  
   { path: 'heroes',  component: HeroesComponent, data: { animation: 'heroesPage' } },
   { path: 'detail/:id', component: HeroDetailComponent, data: { animation: 'detailPage' } }
 ];

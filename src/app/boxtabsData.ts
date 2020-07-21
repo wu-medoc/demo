@@ -5,10 +5,11 @@ export interface boxtabsData {
 }
 
 export const boxtabsData = [
-  { id: 1,linkTitle: 'home' ,routerLink: '/home' },
-  { id: 2,linkTitle: 'swiperDemo',routerLink: '/swiperDemo' },
-  { id: 3,linkTitle: 'formUI',routerLink: '/formUI' },
-  { id: 4,linkTitle: 'animLayer',routerLink: '/animLayer' },
+  { id: 1,linkTitle: 'Home' ,routerLink: '/home' },
+  { id: 2,linkTitle: 'Swiper',routerLink: '/swiperDemo' },
+  { id: 3,linkTitle: 'FormUI',routerLink: '/formUI' },
+  { id: 4,linkTitle: 'AnimLayer',routerLink: '/animLayer' },
   { id: 5,linkTitle: 'Icon',routerLink: '/icon' },
-  { id: 6,linkTitle: 'heroExp',routerLink: '/heroExp' },
+  { id: 6,linkTitle: 'Templeate',routerLink: '/templeate' },
+  { id: 7,linkTitle: 'HeroExp',routerLink: '/heroExp' },
 ];

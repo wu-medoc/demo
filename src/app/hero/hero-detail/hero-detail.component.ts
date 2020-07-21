@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { slideInAnimation } from '../../animations';
 
 import { Hero }         from '../heroes/hero';
 import { HeroService }  from '../hero.service';
@@ -8,7 +9,8 @@ import { HeroService }  from '../hero.service';
 @Component({
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
-  styleUrls: ['./hero-detail.component.css']
+  styleUrls: ['./hero-detail.component.css'],  
+  animations: [ slideInAnimation ]
 })
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
