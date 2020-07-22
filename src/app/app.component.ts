@@ -1,6 +1,6 @@
 import { Component, HostBinding } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { boxtabsData } from './boxtabsData';
+import { interfaceData } from './interfaceData';
 import { SwiperOptions } from 'swiper';
 
 import { RouterOutlet } from '@angular/router';
@@ -36,9 +36,9 @@ export class AppComponent {
     }
   };
 
-  slidestab = boxtabsData;
+  slidestab = interfaceData;
 
- 
+
   /** 頁面切換 */
   @HostBinding('@.disabled')
   public animationsDisabled = false;

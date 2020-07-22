@@ -16,14 +16,13 @@ import { AnimLayerComponent } from './anim-layer/anim-layer.component';
 
 
 const routes: Routes = [  
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent, data: {animation: 'HomePage'} },
   { path: 'swiperDemo', component: swiperDemoComponent, data: {animation: 'swiperDemoPage'} },
   { path: 'animLayer', component: AnimLayerComponent, data: {animation: 'animLayerPage'} },
   { path: 'formUI', component: formUIComponent, data: {animation: 'formUIPage'} },
   { path: 'icon', component: FontawesomeIconComponent, data: {animation: 'fontawesomeIconPage'} },
   { path: 'heroExp', component: HeroTestComponent, data: {animation: 'heroPage'} },
-  { path: 'templeate', component: TempleateComponent, data: {animation: 'tempPage'} },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
 ];
 
 @NgModule({

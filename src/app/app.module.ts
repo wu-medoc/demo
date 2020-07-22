@@ -22,6 +22,7 @@ import { InMemoryDataService } from './hero/in-memory-data.service';
 import { AnimRoutingModule }    from './anim-layer/anim-routing.module';
 import { HeroRoutingModule }    from './hero/hero-routing.module';
 import { AppRoutingModule } from './app-routing.module';
+import { TempleateRoutingModule } from './templeate/templeate-routing.module';
 
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -64,6 +65,7 @@ import { TempleateComponent } from './templeate/templeate.component';
     BrowserModule,
     AnimRoutingModule,
     HeroRoutingModule,
+    TempleateRoutingModule,
     AppRoutingModule,
     BrowserAnimationsModule,    
     NgxUsefulSwiperModule,
