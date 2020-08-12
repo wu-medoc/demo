@@ -12,15 +12,16 @@ import { FontawesomeIconComponent } from './fontawesome-icon/fontawesome-icon.co
 import { HeroDetailComponent } from './hero/hero-detail/hero-detail.component';
 import { MessagesComponent }    from './hero/messages/messages.component';
 import { TempleateComponent } from './templeate/templeate.component';
+import { LifecycleComponent } from './lifecycle/lifecycle.component';
 import { AnimLayerComponent } from './anim-layer/anim-layer.component';
 
 
 const routes: Routes = [  
-  { path: 'home', component: HomeComponent, data: {animation: 'HomePage'} },
+  { path: 'home', component: HomeComponent, data: {animation: 'homePage'} },
   { path: 'swiperDemo', component: swiperDemoComponent, data: {animation: 'swiperDemoPage'} },
   { path: 'animLayer', component: AnimLayerComponent, data: {animation: 'animLayerPage'} },
   { path: 'formUI', component: formUIComponent, data: {animation: 'formUIPage'} },
-  { path: 'icon', component: FontawesomeIconComponent, data: {animation: 'fontawesomeIconPage'} },
+  { path: 'icon', component: FontawesomeIconComponent, data: {animation: 'iconPage'} },
   { path: 'heroExp', component: HeroTestComponent, data: {animation: 'heroPage'} },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
 ];

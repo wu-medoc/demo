@@ -23,6 +23,7 @@ import { AnimRoutingModule }    from './anim-layer/anim-routing.module';
 import { HeroRoutingModule }    from './hero/hero-routing.module';
 import { AppRoutingModule } from './app-routing.module';
 import { TempleateRoutingModule } from './templeate/templeate-routing.module';
+import { LifecycleRoutingModule } from './lifecycle/lifecycle-routing.module';
 
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { NgCircleProgressModule } from 'ng-circle-progress';
@@ -44,6 +45,16 @@ import { FontawesomeIconComponent } from './fontawesome-icon/fontawesome-icon.co
 import { AnimLayerComponent } from './anim-layer/anim-layer.component';
 import { AnimDetailComponent } from './anim-layer/anim-detail.component';
 import { TempleateComponent } from './templeate/templeate.component';
+import { LifecycleComponent } from './lifecycle/lifecycle.component';
+import { PeekABooParentComponent } from './lifecycle/peek-a-boo-parent.component';
+import { PeekABooComponent } from './lifecycle/peek-a-boo.component';
+import { SpyParentComponent } from './lifecycle/spy.component';
+import { SpyDirective } from './lifecycle/spy.directive';
+import { OnChangesParentComponent, OnChangesComponent } from './lifecycle/on-changes.component';
+import { CounterParentComponent,  MyCounterComponent } from './lifecycle/counter.component';
+import { DoCheckParentComponent, DoCheckComponent } from './lifecycle/do-check.component';
+import { AfterContentParentComponent, AfterContentComponent, ChildComponent } from './lifecycle/after-content.component';
+import { AfterViewParentComponent, AfterViewComponent, ChildViewComponent} from './lifecycle/after-view.component';
 
 @NgModule({
   declarations: [
@@ -60,12 +71,30 @@ import { TempleateComponent } from './templeate/templeate.component';
     AnimLayerComponent,
     AnimDetailComponent,
     TempleateComponent,
+    LifecycleComponent,
+    PeekABooParentComponent,
+    PeekABooComponent,
+    SpyParentComponent,
+    SpyDirective,
+    OnChangesParentComponent, 
+    OnChangesComponent,
+    CounterParentComponent,  
+    MyCounterComponent,
+    DoCheckParentComponent, 
+    DoCheckComponent,
+    AfterContentParentComponent, 
+    AfterContentComponent, 
+    ChildComponent,
+    AfterViewParentComponent, 
+    AfterViewComponent, 
+    ChildViewComponent,
   ],
   imports: [
     BrowserModule,
     AnimRoutingModule,
     HeroRoutingModule,
     TempleateRoutingModule,
+    LifecycleRoutingModule,
     AppRoutingModule,
     BrowserAnimationsModule,    
     NgxUsefulSwiperModule,

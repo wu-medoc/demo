@@ -10,8 +10,9 @@ export const interfaceData = [
   { id: 3,linkTitle: 'FormUI',routerLink: '/formUI' },
   { id: 4,linkTitle: 'AnimLayer',routerLink: '/animLayer' },
   { id: 5,linkTitle: 'Icon',routerLink: '/icon' },
-  { id: 6,linkTitle: 'Templeate',routerLink: '/templeate' },
-  { id: 7,linkTitle: 'HeroExp',routerLink: '/heroExp' },
+  { id: 6,linkTitle: 'Lifecycle',routerLink: '/lifecycle' },
+  { id: 7,linkTitle: 'Templeate',routerLink: '/templeate' },
+  { id: 8,linkTitle: 'HeroExp',routerLink: '/heroExp' },
 ];
 
 export class Hero {

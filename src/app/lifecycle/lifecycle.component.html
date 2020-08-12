@@ -1,0 +1,55 @@
+<a id="top"></a>
+<h1>Component Lifecycle Hooks</h1>
+<a href="lifecycle#hooks">Peek-a-boo: (most) lifecycle hooks</a><br>
+<a href="lifecycle#onchanges">OnChanges</a><br>
+<a href="lifecycle#docheck">DoCheck</a><br>
+<a href="lifecycle#after-view">AfterViewInit & AfterViewChecked</a><br>
+<a href="lifecycle#after-content">AfterContentInit & AfterContentChecked</a><br>
+<a href="lifecycle#spy">Spy: directive with OnInit & OnDestroy</a><br>
+<a href="lifecycle#counter">Counter: OnChanges + Spy directive</a><br>
+<hr class="w-100 border">
+<a id="hooks"></a>
+<h5 class="p-2 mt-4">展示每個生命週期鉤子，每個鉤子方法都會在螢幕上顯示一條日誌。</h5>
+<peek-a-boo-parent></peek-a-boo-parent>
+<a href="lifecycle#top">back to top</a>
+
+<hr class="w-100 border">
+<a id="spy"></a>
+<h5 class="p-2 mt-4">顯示如何通過自定義指令使用生命週期掛鉤。
+    該SpyDirective工具實現ngOnInit()和ngOnDestroy()掛鉤，
+    並使用它們來監視和報告元素何時進入或退出當前視圖。</h5>
+<spy-parent></spy-parent>
+<a href="lifecycle#top">back to top</a>
+
+<hr class="w-100 border">
+<a id="onchanges"></a>
+<h5 class="p-2 mt-4">演示ngOnChanges()每當組件輸入屬性之一更改時Angular如何調用該掛鉤，
+    並演示如何解釋changes傳遞給hook方法的對象。</h5>
+<on-changes-parent></on-changes-parent>
+<a href="lifecycle#top">back to top</a>
+
+<hr class="w-100 border">
+<a id="docheck"></a>
+<h5 class="p-2 mt-4">ngDoCheck()使用自定義更改檢測 實現該方法。
+    觀看鉤子發布更改為日誌，以查看Angular多久調用一次此鉤子。</h5>
+<do-check-parent></do-check-parent>
+<a href="lifecycle#top">back to top</a>
+
+<hr class="w-100 border">
+<a id="after-view"></a>
+<h5 class="p-2 mt-4">通過視圖顯示Angular的含義。展示ngAfterViewInit()和ngAfterViewChecked()掛鉤。</h5>
+<after-view-parent></after-view-parent>
+<a href="lifecycle#top">back to top</a>
+
+<hr class="w-100 border">
+<a id="after-content"></a>
+<h5 class="p-2 mt-4">顯示如何將外部內容投影到組件中，以及如何從組件的視圖子項中區分投影的內容。
+    展示ngAfterContentInit()和ngAfterContentChecked()掛鉤。</h5>
+<after-content-parent></after-content-parent>
+<a href="lifecycle#top">back to top</a>
+
+<hr class="w-100 border">
+<a id="counter"></a>
+<h5 class="p-2 mt-4">演示組件和指令的組合，每個都有自己的鉤子。</h5>
+<counter-parent></counter-parent>
+<a href="lifecycle#top">back to top</a>
