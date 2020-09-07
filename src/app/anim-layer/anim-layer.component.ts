@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { slideInAnimation } from '../animations';
+import { slideInAnimation, layerAnimation } from '../animations';
 import { trigger, transition, animate, style } from '@angular/animations';
 import { Anlayer } from './anlayer';
 import { Router, ActivatedRoute, Params} from '@angular/router';
@@ -8,18 +8,7 @@ import { Router, ActivatedRoute, Params} from '@angular/router';
   selector: 'app-anim-layer',
   templateUrl: './anim-layer.component.html',
   styleUrls: ['./anim-layer.component.css'],  
-  animations: [ slideInAnimation,
-    trigger('layerTrigger', [
-      transition(':enter', [
-        style({position: 'absolute', transform: 'translateX(100%)', opacity: '0.5'}),
-        animate('400ms ease-in-out', style({transform: 'translateX(0%)', opacity: '1'}))
-      ]),
-      transition(':leave', [
-        style({position: 'absolute', transform: 'translateX(0%)', opacity: '0.3'}),
-        animate('400ms ease-in-out', style({transform: 'translateX(100%)', opacity: '0'}))
-      ])
-    ]),
-  ]
+  animations: [ slideInAnimation, layerAnimation]
 })
 export class AnimLayerComponent implements OnInit {
 

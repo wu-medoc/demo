@@ -89,3 +89,15 @@ export const slideInAnimation =
     // ])
   ]);
 
+// 同頁切換
+export const layerAnimation =
+trigger('layerTrigger', [
+  transition(':enter', [
+    style({position: 'absolute', left: '200%', opacity: '0.8'}),
+    animate('400ms ease-in'), style({left: '0'})
+  ]),
+  transition(':leave', [
+    style({position: 'absolute', left: '0', opacity: '0.8'}),
+    animate('400ms ease-out', style({left: '200%'}))
+  ])
+]);

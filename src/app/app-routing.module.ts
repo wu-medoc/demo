@@ -12,12 +12,13 @@ import { FontawesomeIconComponent } from './fontawesome-icon/fontawesome-icon.co
 import { HeroDetailComponent } from './hero/hero-detail/hero-detail.component';
 import { MessagesComponent }    from './hero/messages/messages.component';
 import { TempleateComponent } from './templeate/templeate.component';
-import { LifecycleComponent } from './lifecycle/lifecycle.component';
+import { SocialComponent } from './social/social.component';
 import { AnimLayerComponent } from './anim-layer/anim-layer.component';
 
 
 const routes: Routes = [  
   { path: 'home', component: HomeComponent, data: {animation: 'homePage'} },
+  { path: 'social', component: SocialComponent, data: {animation: 'socialPage'} },
   { path: 'swiperDemo', component: swiperDemoComponent, data: {animation: 'swiperDemoPage'} },
   { path: 'animLayer', component: AnimLayerComponent, data: {animation: 'animLayerPage'} },
   { path: 'formUI', component: formUIComponent, data: {animation: 'formUIPage'} },
@@ -27,7 +28,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabled'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

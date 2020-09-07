@@ -28,6 +28,10 @@ import { LifecycleRoutingModule } from './lifecycle/lifecycle-routing.module';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
+//angularx-social-login
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider, AmazonLoginProvider,} from 'angularx-social-login';
+
 //Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -45,6 +49,13 @@ import { FontawesomeIconComponent } from './fontawesome-icon/fontawesome-icon.co
 import { AnimLayerComponent } from './anim-layer/anim-layer.component';
 import { AnimDetailComponent } from './anim-layer/anim-detail.component';
 import { TempleateComponent } from './templeate/templeate.component';
+import { BigHeroDetailComponent, HeroDetailsComponent } from './templeate/hero-details.component';
+import { ClickDirective, ClickDirective2 } from './templeate/click.directive';
+import { SizerComponent } from './templeate/sizer.component';
+import { SvgComponent } from './templeate/svg.component';
+import { HeroFormComponent } from './templeate/hero-form.component';
+import { heroSwitchComponents } from './templeate/hero-switch.components';
+import { UnlessDirective } from './templeate/unless.directive';
 import { LifecycleComponent } from './lifecycle/lifecycle.component';
 import { PeekABooParentComponent } from './lifecycle/peek-a-boo-parent.component';
 import { PeekABooComponent } from './lifecycle/peek-a-boo.component';
@@ -55,6 +66,9 @@ import { CounterParentComponent,  MyCounterComponent } from './lifecycle/counter
 import { DoCheckParentComponent, DoCheckComponent } from './lifecycle/do-check.component';
 import { AfterContentParentComponent, AfterContentComponent, ChildComponent } from './lifecycle/after-content.component';
 import { AfterViewParentComponent, AfterViewComponent, ChildViewComponent} from './lifecycle/after-view.component';
+import { HighlightDirective } from './highlight.directive';
+import { NewComponentComponent } from './new-component/new-component.component';
+import { SocialComponent } from './social/social.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +85,15 @@ import { AfterViewParentComponent, AfterViewComponent, ChildViewComponent} from 
     AnimLayerComponent,
     AnimDetailComponent,
     TempleateComponent,
+    BigHeroDetailComponent, 
+    ClickDirective, 
+    ClickDirective2,
+    HeroFormComponent,
+    heroSwitchComponents,
+    UnlessDirective,
+    SizerComponent,
+    SvgComponent,
+    HeroDetailsComponent,
     LifecycleComponent,
     PeekABooParentComponent,
     PeekABooComponent,
@@ -87,10 +110,10 @@ import { AfterViewParentComponent, AfterViewComponent, ChildViewComponent} from 
     ChildComponent,
     AfterViewParentComponent, 
     AfterViewComponent, 
-    ChildViewComponent,
+    ChildViewComponent, HighlightDirective, NewComponentComponent, SocialComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AnimRoutingModule,
     HeroRoutingModule,
     TempleateRoutingModule,
@@ -125,8 +148,34 @@ import { AfterViewParentComponent, AfterViewComponent, ChildViewComponent} from 
       renderOnClick: false
     }),
     NgbModule,
+    SocialLoginModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          // {
+          //   id: GoogleLoginProvider.PROVIDER_ID,
+          //   provider: new GoogleLoginProvider(
+          //     'clientId'
+          //   ),
+          // },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('695335051058509'),
+          },
+          // {
+          //   id: AmazonLoginProvider.PROVIDER_ID,
+          //   provider: new AmazonLoginProvider(
+          //     'clientId'
+          //   ),
+          // },
+        ],
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -7,8 +7,9 @@
   <a class="butt" href="templeate#mental-model">Mental Model</a><br>
   <a class="butt" href="templeate#buttons">Buttons</a><br>
   <a class="butt" href="templeate#prop-vs-attrib">Properties vs. Attributes</a><br>
-  <br>
-  <a class="butt" href="templeate#property-binding">Property Binding</a><br>
+</div>
+  <strong><a href="templeate#property-binding" class="text-dark">Property Binding</a></strong>
+<div class="d-flex align-content-stretch flex-wrap">
   <div class="butt" style="margin-left:8px">
     <a href="templeate#attribute-binding">Attribute Binding</a><br>
     <a href="templeate#class-binding">Class Binding</a><br>
@@ -28,7 +29,9 @@
     <a href="templeate#ngFor-index">NgFor with index</a><br>
     <a href="templeate#ngFor-trackBy">NgFor with trackBy</a><br>
   </div>
-  <a class="butt" href="templeate#ngSwitch">NgSwitch</a><br>
+  <a class="butt" href="templeate#ngSwitch">NgSwitch</a><br>  
+  <a class="butt" href="templeate#ngAttribute">Attribute Directive</a><br>
+  <a class="butt" href="templeate#ngStructural">Structural Directives</a><br>  
 </div>
 <div class="d-flex align-content-stretch flex-wrap">
   <a class="butt" href="templeate#ref-vars">Template reference variables</a><br>
@@ -39,13 +42,693 @@
   <a class="butt" href="templeate#enums">Enums</a><br>
   <a class="butt" href="templeate#svg-templates">SVG Templates</a>
 </div>
-
+<!-- https://angular.io/guide/template-statements -->
 <!-- Interpolation and expressions -->
-<hr class="w-100 border">
-<h2 id="interpolation">Interpolation</h2>
+
+<hr class="w-100 my-4 border">
+<h2 id="interpolation">Interpolation 插值</h2>
+<p>學習如何在HTML中使用插值和表達式。</p>
 <p>My current hero is {{currentHero.name}}</p>
 <h6>
-  {{title}}
-  <img src="{{heroImageUrl}}" style="height:30px">
+  {{title}} <img src="{{heroImageUrl}}" style="height:30px">
 </h6>
-<hr class="w-100 border">
+<p>The sum of 1 + 1 is {{1 + 1}}</p>
+<p>The sum of 1 + 1 is not {{1 + 1 + getVal()}}</p>
+<a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="expression-context">Expression context 表達式</h2>
+<p>
+  模板表達式會產生一個值，並出現在雙花括號內。<br>
+  Angular執行該表達式並將其分配給綁定目標的屬性；目標可以是HTML元素，組件或指令。<br>
+</p>
+<p>Component expression context (&#123;&#123;title&#125;&#125;, [hidden]="isUnchanged")</p>
+<div class="context">
+  {{title}} <span [hidden]="isUnchanged">changed</span>
+</div>
+<p>Template input variable expression context (let hero)</p>
+<!-- template hides the following; plenty of examples later -->
+<ng-template>
+  <div *ngFor="let hero of heroes">{{hero.name}}</div>
+</ng-template>
+<p>Template reference variable expression context (#heroInput)</p>
+<div (keyup)="0" class="context">
+  Type something: <input #heroInput> {{heroInput.value}}
+</div>
+<a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="statement-context">Statement context 陳述語境</h2>
+<p>Component statement context ( (click)="onSave() )
+<div class="context">
+  <button (click)="deleteHero()">Delete hero</button>
+</div>
+<p>Template $event statement context</p>
+<div class="context">
+  <button (click)="onSave($event)">Save</button>
+</div>
+<p>Template input variable statement context (let hero)</p>
+<!-- template hides the following; plenty of examples later -->
+<div class="context">
+  <button *ngFor="let hero of heroes" (click)="deleteHero(hero)">{{hero.name}}</button>
+</div>
+<p>Template reference variable statement context (#heroForm)</p>
+<div class="context">
+  <form #heroForm (ngSubmit)="onSubmit(heroForm)"> ... </form>
+</div>
+<a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="mental-model">New Mental Model</h2>
+<div class="row">
+  <div class="col-6 border">
+    <div class="special">Mental Model</div>
+    <img src="{{heroImageUrl}}">
+    <button disabled>Save</button>
+  </div>
+  <div class="col-6 border">
+    <div>
+      <!-- Normal HTML -->
+      <div class="special">Mental Model</div>
+      <!-- Wow! A new element! -->
+      <app-hero-details></app-hero-details>
+    </div>
+  </div>
+  <div class="col-6 border">
+    <div>
+      將按鈕的禁用狀態綁定到 "isUnchanged "屬性
+      <button [disabled]="isUnchanged">Save</button>
+    </div>
+  </div>
+  <div class="col-6 border">
+    <button (click)="onSave()">Save</button>
+  </div>
+  <div class="col-6 border">
+    <div>
+      <img [src]="heroImageUrl">
+      <app-hero-details [hero]="currentHero"></app-hero-details>
+      <div [ngClass]="{'special': isSpecial}"></div>
+    </div>
+  </div>
+  <div class="col-6 border">
+    <app-hero-details (deleteRequest)="deleteHero()"></app-hero-details>
+  </div>
+  <div class="col-6 border">
+    <div (myClick)="clicked=$event" clickable>click me</div> {{clicked}}
+  </div>
+  <div class="col-6 border">
+    <div>
+      Hero Name:
+      <input [(ngModel)]="name">
+      {{name}}
+    </div>
+  </div>
+  <div class="col-6 border">
+    <button [attr.aria-label]="help">help</button>
+    <div [class.special]="isSpecial">Special</div>
+  </div>
+  <div class="col-6 border">
+    <button [style.color]="isSpecial ? 'red' : 'green'">
+      button</button>
+  </div>
+</div>
+<a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="prop-vs-attrib">Property vs. Attribute (img examples)</h2>
+<!-- examine the following <img> tag in the browser tools -->
+<img src="img/ng-logo.png" [src]="heroImageUrl">
+<img [src]="iconUrl"/>
+<img bind-src="heroImageUrl"/>
+<img [attr.src]="villainImageUrl"/>
+<p><img src="{{heroImageUrl}}"> is the <i>interpolated</i> image.</p>
+<p><img [src]="heroImageUrl"> is the <i>property bound</i> image.</p>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="buttons">Buttons</h2>
+<button>Enabled (but does nothing)</button>
+<button disabled>Disabled</button>
+<button disabled=false>Still disabled</button>
+<br><br>
+<button disabled>disabled by attribute</button>
+<button [disabled]="isUnchanged">disabled by property binding</button>
+<br><br>
+<button bind-disabled="isUnchanged" on-click="onSave($event)">Disabled Cancel</button>
+<button [disabled]="!canSave" (click)="onSave($event)">Enabled Save</button>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="property-binding">Property Binding 屬性綁定</h2>
+<p>設置目標元素或指令修飾符的屬性。@Input()</p>
+<div [ngClass]="classes">[ngClass] binding to the classes property</div>
+<app-hero-details [hero]="currentHero"></app-hero-details>
+<!-- ERROR: HeroDetailComponent.hero expects a Hero object, not the string "currentHero" -->
+<div *ngIf="true">
+  <app-hero-details hero="currentHero"></app-hero-details>
+</div>
+<app-hero-details prefix="You are my" [hero]="currentHero"></app-hero-details>
+<p><span>"{{title}}" is the <i>interpolated插值</i> title.</span></p>
+<p>"<span [innerHTML]="title"></span>" is the <i>property bound屬性綁定</i> title.</p>
+<br><small class="text-muted">
+  Angular在對以下兩行執行時, 會出現警告<br>
+  WARNING: sanitizing HTML stripped some content (see http://g.co/ng/security#xss).
+</small>
+<p><span>"{{evilTitle}}" is the <i>interpolated插值</i> evil title.</span></p>
+<p>"<span [innerHTML]="evilTitle"></span>" is the <i>property bound屬性綁定</i> evil title.</p>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="attribute-binding">Attribute Binding 屬性綁定</h2>
+<!--  create and set a colspan attribute (colspan=2)-->
+<table class="table table-bordered">
+  <tr><td [attr.colspan]="1 + 1">One-Two</td></tr>
+  <!-- ERROR: There is no `colspan` property to set!
+    <tr><td colspan="{{1 + 1}}">Three-Four</td></tr>
+  -->
+  <tr><td>Five</td><td>Six</td></tr>
+</table>
+<!-- create and set an aria attribute for assistive technology -->
+<button [attr.aria-label]="actionName">{{actionName}} with Aria</button>
+<br><br>
+<!-- The following effects are not discussed in the chapter -->
+<div>
+  <!-- any use of [attr.disabled] creates the disabled attribute -->
+  <button [attr.disabled]="isUnchanged">Disabled</button>
+  <button [attr.disabled]="!isUnchanged">Disabled as well</button>
+  <!-- we'd have to remove it with property binding 用屬性綁定來移除它-->
+  <button disabled [disabled]="false">Enabled (but inert)</button>
+</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="class-binding">Class Binding 類別綁定</h2>
+<!-- standard class attribute setting  -->
+<div class="bad curly special">Bad curly special</div>
+<!-- reset/override all class names with a binding  -->
+<div [class]="NgBadCurly">Bad curly</div>
+<!-- toggle the "special" class on/off with a property -->
+<div [class.special]="isSpecial">The class binding is special</div>
+<!-- binding to `class.special` trumps the class attribute -->
+<div class="special"
+     [class.special]="!isSpecial">This one is not so special</div>
+<div bind-class.special="isSpecial">This class binding is special too</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="style-binding">Style Binding</h2>
+<button [style.color]="isSpecial ? 'red': 'green'">Red</button>
+<button [style.background-color]="canSave ? 'cyan': 'grey'" >Save</button>
+<button [style.font-size.em]="isSpecial ? 3 : 1" >Big</button>
+<button [style.font-size.%]="!isSpecial ? 150 : 50" >Small</button>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="event-binding">Event Binding 事件綁定</h2>
+<button (click)="onSave()">Save</button>
+<button on-click="onSave()">On Save</button>
+<div>
+<!-- `myClick` is an event on the custom `ClickDirective` -->
+<div (myClick)="clickMessage=$event" clickable>click with myClick</div>
+{{clickMessage}}
+</div>
+<!-- binding to a nested component -->
+<app-hero-details (deleteRequest)="deleteHero($event)" [hero]="currentHero"></app-hero-details>
+<br>
+<app-big-hero-detail (deleteRequest)="deleteHero($event)" [hero]="currentHero"></app-big-hero-detail>
+<div class="parent-div" (click)="onClickMe($event)" clickable>Click me
+  <div class="child-div">Click me too!</div>
+</div>
+<div (click)="onSave()" clickable>
+  <p>Will save only once</p> 
+  <button (click)="onSave($event)">Save, no propagation</button>
+</div>
+<div (click)="onSave()" clickable>
+  <p>Will save twice</p> 
+  <button (click)="onSave()">Save w/ propagation</button>
+</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="two-way">Two-way Binding</h2>
+<p>雙向綁定-在類及其模板之間共享數據</p>
+<div id="two-way-1">
+  <app-sizer [(size)]="fontSizePx"></app-sizer>
+  <div [style.font-size.px]="fontSizePx">Resizable Text</div>
+  <label>FontSize (px): <input [(ngModel)]="fontSizePx"></label>
+</div>
+<br>
+<div id="two-way-2">
+  <h3>De-sugared two-way binding</h3>
+  <app-sizer [size]="fontSizePx" (sizeChange)="fontSizePx=$event"></app-sizer>
+</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="ngModel">NgModel (two-way) Binding</h2>
+<h4>內置屬性指令</h4>
+<p>屬性指令偵聽並修改其他HTML元素，屬性，屬性和組件的行為。您通常將它們應用於元素，就好像它們是HTML屬性一樣，因此也就是名稱。
+  許多NgModule（例如RouterModule 和）都FormsModule定義了自己的屬性指令。最常見的屬性指令如下：<br>
+  NgClass—添加和刪除一組CSS類。<br>
+  NgStyle—添加和刪除一組HTML樣式。<br>
+  NgModel-將雙向數據綁定添加到HTML表單元素。</p>
+<h3>Result: {{currentHero.name}}</h3>
+<input [value]="currentHero.name" (input)="updateCurrentHeroName($event)">without NgModel<br>
+<input [(ngModel)]="currentHero.name">[(ngModel)]<br>
+<input bindon-ngModel="currentHero.name">bindon-ngModel<br>
+<input [ngModel]="currentHero.name" (ngModelChange)="currentHero.name=$event">(ngModelChange)="currentHero.name=$event"<br>
+<input [ngModel]="currentHero.name" (ngModelChange)="setUppercaseName($event)">(ngModelChange)="setUppercaseName($event)"<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="ngClass">NgClass Binding</h2>
+<p>currentClasses is {{currentClasses | json}}</p>
+<div [ngClass]="currentClasses">This div is initially saveable, unchanged, and special</div>
+<!-- not used in chapter -->
+<br>
+<label>saveable   <input type="checkbox" [(ngModel)]="canSave"></label> |
+<label>modified:  <input type="checkbox" [value]="!isUnchanged" (change)="isUnchanged=!isUnchanged"></label> |
+<label>special:   <input type="checkbox" [(ngModel)]="isSpecial"></label>
+<button (click)="setCurrentClasses()">Refresh currentClasses</button>
+<br><br>
+<div [ngClass]="currentClasses">
+  This div should be {{ canSave ? "": "not"}} saveable,
+                  {{ isUnchanged ? "unchanged" : "modified" }} and,
+                  {{ isSpecial ? "": "not"}} special after clicking "Refresh".</div>
+<br><br>
+<div [ngClass]="isSpecial ? 'special' : ''">This div is special</div>
+<div class="bad curly special">Bad curly special</div>
+<div [ngClass]="{'bad':false, 'curly':true, 'special':true}">Curly special</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border"><h2 id="ngStyle">NgStyle Binding</h2>
+<div [style.font-size]="isSpecial ? 'x-large' : 'smaller'" >
+  This div is x-large or smaller.
+</div>
+<h3>[ngStyle] binding to currentStyles - CSS property names</h3>
+<p>currentStyles is {{currentStyles | json}}</p>
+<div [ngStyle]="currentStyles">
+  This div is initially italic, normal weight, and extra large (24px).
+</div>
+<!-- not used in chapter -->
+<br>
+<label>italic: <input type="checkbox" [(ngModel)]="canSave"></label> |
+<label>normal: <input type="checkbox" [(ngModel)]="isUnchanged"></label> |
+<label>xlarge: <input type="checkbox" [(ngModel)]="isSpecial"></label>
+<button (click)="setCurrentStyles()">Refresh currentStyles</button>
+<br><br>
+<div [ngStyle]="currentStyles">
+  This div should be {{ canSave ? "italic": "plain"}},
+                  {{ isUnchanged ? "normal weight" : "bold" }} and,
+                  {{ isSpecial ? "extra large": "normal size"}} after clicking "Refresh".</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border"><h2 id="ngIf">NgIf Binding</h2>
+<div>
+  <p>If isActive is true, app-hero-details will render: </p>
+  <app-hero-details *ngIf="isActive" [hero]="hero"></app-hero-details>
+  <button (click)="isActiveToggle()">Toggle app-hero-details</button>
+</div><br>
+<div *ngIf="currentHero">If currentHero isn't null, say hello to {{currentHero.name}}</div><br>
+<p>nullHero is null by default. NgIf guards against null. Give it a value to show it:</p>
+<div *ngIf="nullCustomer">Hello, {{nullCustomer}}</div>
+<button (click)="giveNullCustomerValue()">Give nullCustomer a value</button>
+<!-- NgIf binding with template (no *) -->
+<ng-template [ngIf]="currentHero">Add {{currentHero.name}} with template</ng-template>
+<!-- Does not show because isActive is false! -->
+<div>Hero Detail removed from DOM (via template) because isActive is false</div>
+<ng-template [ngIf]="isActive">
+  <app-hero-details></app-hero-details>
+</ng-template>
+<!-- isSpecial is true -->
+<div [class.hidden]="!isSpecial">Show with class</div>
+<div [class.hidden]="isSpecial">Hide with class</div>
+<!-- HeroDetail is in the DOM but hidden -->
+<app-hero-details [class.hidden]="isSpecial"></app-hero-details>
+<div [style.display]="isSpecial ? 'block' : 'none'">Show with style</div>
+<div [style.display]="isSpecial ? 'none'  : 'block'">Hide with style</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border"><h2 id="ngFor">NgFor Binding</h2>
+<div class="box">
+  <div *ngFor="let hero of heroes">{{hero.name}}</div>
+</div>
+<br>
+<div class="box">
+  <!-- *ngFor w/ hero-detail Component -->
+  <app-hero-details *ngFor="let hero of heroes" [hero]="hero"></app-hero-details>
+</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+<hr class="w-100 my-4 border">
+<h4 id="ngFor-index">*ngFor with index</h4>
+<p>with <i>semi-colon</i> separator</p>
+<div class="box">
+  <div *ngFor="let hero of heroes; let i=index">{{i + 1}} - {{hero.name}}</div>
+</div>
+<p>with <i>comma</i> separator</p>
+<div class="box">
+  <!-- Ex: "1 - Hercules" -->
+  <div *ngFor="let hero of heroes, let i=index">{{i + 1}} - {{hero.name}}</div>
+</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h4 id="ngFor-trackBy">*ngFor trackBy</h4>
+<button (click)="resetHeroes()">Reset heroes</button>
+<button (click)="changeIds()">Change ids</button>
+<button (click)="clearTrackByCounts()">Clear counts</button>
+<p><i>without</i> trackBy</p>
+<div class="box">
+  <div #noTrackBy *ngFor="let hero of heroes">({{hero.id}}) {{hero.name}}</div>
+  <div id="noTrackByCnt" *ngIf="heroesNoTrackByCount" >
+    Hero DOM elements change #{{heroesNoTrackByCount}} without trackBy
+  </div>
+</div>
+<p>with trackBy</p>
+<div class="box">
+  <div #withTrackBy *ngFor="let hero of heroes; trackBy: trackByHeroes">({{hero.id}}) {{hero.name}}</div>
+  <div id="withTrackByCnt" *ngIf="heroesWithTrackByCount">
+    Hero DOM elements change #{{heroesWithTrackByCount}} with trackBy
+  </div>
+</div>
+<br><br><br>
+<p>with trackBy and <i>semi-colon</i> separator</p>
+<div class="box">
+  <div *ngFor="let hero of heroes; trackBy: trackByHeroes">
+    ({{hero.id}}) {{hero.name}}
+  </div>
+</div>
+<p>with trackBy and <i>comma</i> separator</p>
+<div class="box">
+  <div *ngFor="let hero of heroes, trackBy: trackByHeroes">({{hero.id}}) {{hero.name}}</div>
+</div>
+<p>with trackBy and <i>space</i> separator</p>
+<div class="box">
+  <div *ngFor="let hero of heroes trackBy: trackByHeroes">({{hero.id}}) {{hero.name}}</div>
+</div>
+<p>with <i>generic</i> trackById function</p>
+<div class="box">
+  <div *ngFor="let hero of heroes, trackBy: trackById">({{hero.id}}) {{hero.name}}</div>
+</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="ngSwitch">NgSwitch Binding</h2>
+<p>Pick your favorite hero</p>
+<div>
+  <label *ngFor="let h of heroes">
+    <input type="radio" name="heroes" [(ngModel)]="currentHero" [value]="h">{{h.name}}
+  </label>
+</div>
+<h4>NgSwitch</h4>
+<div [ngSwitch]="currentHero.emotion">
+  <app-happy-hero    *ngSwitchCase="'happy'"    [hero]="currentHero"></app-happy-hero>
+  <app-sad-hero      *ngSwitchCase="'sad'"      [hero]="currentHero"></app-sad-hero>
+  <app-confused-hero *ngSwitchCase="'confused'" [hero]="currentHero"></app-confused-hero>
+  <div *ngSwitchCase="'confused'">Are you as confused as {{currentHero.name}}?</div>
+  <app-unknown-hero  *ngSwitchDefault           [hero]="currentHero"></app-unknown-hero>
+</div>
+<h4>NgSwitch with &lt;ng-template&gt;</h4>
+<div [ngSwitch]="currentHero.emotion">
+  <ng-template [ngSwitchCase]="'happy'">
+    <app-happy-hero [hero]="currentHero"></app-happy-hero>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'sad'">
+    <app-sad-hero [hero]="currentHero"></app-sad-hero>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'confused'">
+    <app-confused-hero [hero]="currentHero"></app-confused-hero>
+  </ng-template >
+  <ng-template ngSwitchDefault>
+    <app-unknown-hero [hero]="currentHero"></app-unknown-hero>
+  </ng-template>
+</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="ngAttribute">My First Attribute Directive</h2>
+<h4>屬性指令</h4>
+<p>一個屬性指令改變DOM元素的外觀或行為。</p>
+<p>Angular中有三種指令：<br>
+  1.組件-帶有模板的指令。<br>
+  2.結構化指令-通過添加和刪除DOM元素來更改DOM佈局。<br>
+  3.屬性指令-更改元素，組件或其他指令的外觀或行為。</p>
+<p>使用CLI命令在終端窗口中創建指令類文件ng generate directive highlight</p>
+<h4>Pick a highlight color</h4>
+<div>
+  <input type="radio" name="colors" (click)="colors='lightgreen'">Green
+  <input type="radio" name="colors" (click)="colors='yellow'">Yellow
+  <input type="radio" name="colors" (click)="colors='cyan'">Cyan
+</div>
+<p [appHighlight]="colors">Highlight me!</p>
+<p [appHighlight]="colors" defaultColor="violet">
+  Highlight me too!
+</p>
+<p>-----------------------------</p>
+<p><i>Mouse over the following lines to see fixed highlights</i></p>
+<p [appHighlight]="'yellow'">Highlighted in yellow</p>
+<p appHighlight="orange">Highlighted in orange</p>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="ngStructural">Structural Directives</h2>
+<h4>結構指令</h4>
+<p>結構指令負責HTML佈局。它們通常通過添加，刪除或操縱元素來成形或重塑DOM的結構。<br>
+  與其他指令一樣，您將結構指令應用於host元素。然後，該指令執行與該主機元素及其後代有關的所有操作。<br>  
+  結構指令很容易識別。在此示例中，星號（*）位於指令屬性名稱之前。</p>
+<p>Conditional display of hero</p>
+<blockquote>
+<div *ngIf="hero" class="name">{{hero.name}}</div>
+</blockquote>
+<p>List of heroes</p>
+<ul style="list-style-type:square">
+  <li *ngFor="let hero of heroes" class="ml-4">{{hero.name}}</li>
+</ul>
+<p>-----------------------------</p>
+<h2>NgIf</h2>
+<p>NgIf是最簡單的結構指令，也是最容易理解的指令。它需要一個布爾表達式，並使整個DOM塊出現或消失。<br>
+  該ngIf指令不會使用CSS隱藏元素。它從DOM中物理地添加和刪除它們。<br>
+  當條件為false時，NgIf將其宿主元素從DOM中刪除，將其與DOM事件（它所創建的附件）分離，將組件與Angular更改檢測分離，並銷毀它。<br>
+  組件和DOM節點可以被垃圾收集並釋放內存。<br>
+  您的首選應該是刪除用戶看不到的DOM元素，並使用諸如的結構指令來恢復未使用的資源NgIf。</p>
+<p *ngIf="true">
+  Expression is true and ngIf is true.
+  This paragraph is in the DOM.
+</p>
+<p *ngIf="false">
+  Expression is false and ngIf is false.
+  This paragraph is not in the DOM.
+</p>
+<p [style.display]="'block'">
+  Expression sets display to "block".
+  This paragraph is visible.
+</p>
+<p [style.display]="'none'">
+  Expression sets display to "none".
+  This paragraph is hidden but still in the DOM.
+</p>
+<h4>NgIf with template</h4>
+<p>Angular &lt;ng-template&gt;在實際渲染過程中消耗了內容，並用&lt;ng-template&gt;診斷註釋替換了。</p>
+<p>&lt;ng-template&gt; element</p>
+<div *ngIf="hero" class="name">{{hero.name}}</div>
+<ng-template [ngIf]="hero">
+  <div class="name">{{hero.name}}</div>
+</ng-template>
+<p>-----------------------------</p>
+<h2>&lt;ng-container&gt;</h2>
+<h4>*ngIf with a &lt;ng-container&gt;</h4>
+<p>Angular &lt;ng-container&gt;是一個分組元素，不會干擾樣式或佈局，因為Angular 不會將其放入DOM中。</p>
+<button (click)="hero = hero ? null : heroes[0]">Toggle hero</button>
+<p>
+  I turned the corner
+  <ng-container *ngIf="hero">
+    and saw {{hero.name}}. I waved
+  </ng-container>
+  and continued on my way.
+</p>
+<p>
+  I turned the corner
+  <span *ngIf="hero">
+    and saw {{hero.name}}. I waved
+  </span>
+  and continued on my way.
+</p>
+<p><i>&lt;select&gt; with &lt;span&gt;</i></p>
+<div>
+  Pick your favorite hero
+  (<label><input type="checkbox" checked (change)="showSad = !showSad">show sad</label>)
+</div>
+<select [(ngModel)]="hero">
+  <span *ngFor="let h of heroes">
+    <span *ngIf="showSad || h.emotion !== 'sad'">
+      <option [ngValue]="h">{{h.name}} ({{h.emotion}})</option>
+    </span>
+  </span>
+</select>
+<p><i>&lt;select&gt; with &lt;ng-container&gt;</i></p>
+<div>
+  Pick your favorite hero
+  (<label><input type="checkbox" checked (change)="showSad = !showSad">show sad</label>)
+</div>
+<select [(ngModel)]="hero">
+  <ng-container *ngFor="let h of heroes">
+    <ng-container *ngIf="showSad || h.emotion !== 'sad'">
+      <option [ngValue]="h">{{h.name}} ({{h.emotion}})</option>
+    </ng-container>
+  </ng-container>
+</select>
+<br><br>
+<p>-----------------------------</p>
+<h2>NgFor</h2>
+<p>Angular 以類似的方式將其從星號（*）語法轉換為element。*ngFor&lt;ng-template&gt;</p>
+<div class="box">
+<p class="code">&lt;div *ngFor="let hero of heroes; let i=index; let odd=odd; trackBy: trackById" [class.odd]="odd"&gt;</p>
+<div *ngFor="let hero of heroes; let i=index; let odd=odd; trackBy: trackById" [class.odd]="odd">
+  ({{i}}) {{hero.name}}
+</div>
+<p class="code">&lt;ng-template ngFor let-hero [ngForOf]="heroes" let-i="index" let-odd="odd" [ngForTrackBy]="trackById"/&gt;</p>
+<ng-template ngFor let-hero [ngForOf]="heroes" let-i="index" let-odd="odd" [ngForTrackBy]="trackById">
+  <div [class.odd]="odd">({{i}}) {{hero.name}}</div>
+</ng-template>
+</div>
+<p>這顯然比ngIf更複雜，這也是正確的。 NgFor指令比本指南中的NgIf有更多的功能，包括必需的和可選的。至少NgFor需要一個循環變量（let hero）和一個列表（heroes）。</p>
+<p>-----------------------------</p>
+<h2>UnlessDirective</h2>
+<p>
+  The condition is currently
+  <span [ngClass]="{ 'a': !condition, 'b': condition, 'unless': true }">{{condition}}</span>.
+  <button
+    (click)="condition = !condition"
+    [ngClass] = "{ 'a': condition, 'b': !condition }" >
+    Toggle condition to {{condition ? 'false' : 'true'}}
+  </button>
+</p>
+<p *appUnless="condition" class="unless a">
+  (A) This paragraph is displayed because the condition is false.
+</p>
+<p *appUnless="!condition" class="unless b">
+  (B) Although the condition is true,
+  this paragraph is displayed because appUnless is set to false.
+</p>
+<h4>UnlessDirective with template</h4>
+<p *appUnless="condition">Show this sentence unless the condition is true.</p>
+<p *appUnless="condition" class="code unless">
+  (A) &lt;p *appUnless="condition" class="code unless"&gt;
+</p>
+<ng-template [appUnless]="condition">
+  <p class="code unless">
+    (A) &lt;ng-template [appUnless]="condition"&gt;
+  </p>
+</ng-template>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="ref-vars">Template reference variables</h2>
+<p>模板引用變量 -使用特殊變量來引用模板中的DOM元素</p>
+<input #phone placeholder="phone number">
+<!-- lots of other elements -->
+<!-- phone refers to the input element; pass its `value` to an event handler -->
+<button (click)="callPhone(phone.value)">Call</button>
+<input ref-fax placeholder="fax number">
+<button (click)="callFax(fax.value)">Fax</button>
+<!-- btn refers to the button element; show its disabled state -->
+<button #btn disabled [innerHTML]="'disabled by attribute: '+btn.disabled"></button>
+<h4>Example Form</h4>
+<app-hero-form [hero]="currentHero"></app-hero-form>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="inputs-and-outputs">Inputs and Outputs</h2>
+<p>輸入和輸出-在父上下文和子指令或組件之間共享數據</p>
+<img [src]="iconUrl"/>
+<button (click)="onSave()">Save</button>
+<app-hero-details [hero]="currentHero" (deleteRequest)="deleteHero($event)">
+</app-hero-details>
+<div (myClick)="clickMessage2=$event" clickable>myClick2</div>
+{{clickMessage2}}
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="pipes">Pipes</h2>
+<div>Title through uppercase pipe: {{title | uppercase}}</div>
+<!-- Pipe chaining: convert title to uppercase, then to lowercase -->
+<div>
+  Title through a pipe chain:
+  {{title | uppercase | lowercase}}
+</div>
+<!-- pipe with configuration argument => "February 25, 1970" -->
+<div>Birthdate: {{currentHero?.birthdate | date:'longDate'}}</div>
+<div>{{currentHero | json}}</div>
+<div>Birthdate: {{(currentHero?.birthdate | date:'longDate') | uppercase}}</div>
+<div>
+  <!-- pipe price to USD and display the $ symbol -->
+  <label>Price: </label>{{product.price | currency:'USD':'symbol'}}
+</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="safe-navigation-operator">Safe navigation operator <i>?.</i></h2>
+<div>
+  The title is {{title}}
+</div>
+<div>
+  The current hero's name is {{currentHero?.name}}
+</div>
+<div>
+  The current hero's name is {{currentHero.name}}
+</div>
+<!--
+The null hero's name is {{nullHero.name}}
+See console log:
+  TypeError: Cannot read property 'name' of null in [null]
+-->
+<!--No hero, div not displayed, no error -->
+<div *ngIf="nullHero">The null hero's name is {{nullHero.name}}</div>
+<div>
+The null hero's name is {{nullHero && nullHero.name}}
+</div>
+<div>
+  <!-- No hero, no problem! -->
+  The null hero's name is {{nullHero?.name}}
+</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="non-null-assertion-operator">Non-null assertion operator <i>!.</i></h2>
+<div>
+  <!--No hero, no text -->
+  <div *ngIf="hero">
+    The hero's name is {{hero!.name}}
+  </div>
+</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="any-type-cast-function">$any type cast function <i>$any( )</i>.</h2>
+<div>
+  <!-- Accessing an undeclared member -->
+  <div>
+    The hero's marker is {{$any(hero).marker}}
+  </div>
+</div>
+<div>
+  <!-- Accessing an undeclared member -->
+  <div>
+    Undeclared members is {{$any(this).member}}
+  </div>
+</div>
+<br><a class="to-toc" href="templeate#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="enums">Enums in binding</h2>
+<p>
+  The name of the Color.Red enum is {{Color[Color.Red]}}.<br>
+  The current color is {{Color[color]}} and its number is {{color}}.<br>
+  <button [style.color]="Color[color]" (click)="colorToggle()">Enum Toggle</button>
+</p>
+<a class="to-toc" href="#toc">top</a>
+
+<hr class="w-100 my-4 border">
+<h2 id="svg-templates">SVG Templates</h2>
+<p>模板中的SVG-動態生成交互式圖形</p>
+<app-svg></app-svg>
+<a class="to-toc" href="templeate#toc">top</a>
