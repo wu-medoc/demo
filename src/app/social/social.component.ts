@@ -14,7 +14,8 @@ import {
 })
 export class SocialComponent implements OnInit {
 
-  user: SocialUser;
+  user: SocialUser;  
+  name = 'ngx sharebuttons';
 
   constructor(private authService: SocialAuthService) { }
 

@@ -15,6 +15,7 @@ declare var $: any;
 })
 
 export class AppComponent {
+  
   /** 列表選單 */
   public boxTabs : SwiperOptions = {
     pagination: { el: '.swiper-pagination', clickable: true },

@@ -31,6 +31,8 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 //angularx-social-login
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider, AmazonLoginProvider,} from 'angularx-social-login';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
 //Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -148,7 +150,11 @@ import { SocialComponent } from './social/social.component';
       renderOnClick: false
     }),
     NgbModule,
-    SocialLoginModule,
+    SocialLoginModule,    
+    ShareButtonsModule.withConfig({
+      debug: true
+    }),
+    ShareIconsModule,
   ],
   providers: [
     {
