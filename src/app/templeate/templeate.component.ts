@@ -9,7 +9,7 @@ export enum Color {Red, Green, Blue};
 })
 export class TempleateComponent implements AfterViewInit, OnInit {
 
-  //初始化
+  // 初始化
   ngOnInit() {
     this.resetHeroes();
     this.setCurrentClasses();
@@ -141,7 +141,7 @@ export class TempleateComponent implements AfterViewInit, OnInit {
       special:  this.isSpecial
     };
   }
-  
+
   currentStyles: {};
   setCurrentStyles() {
     // CSS styles: set per current state of component properties 根據組件屬性的當前狀態設置

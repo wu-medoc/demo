@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // 引用 intl-tel-input 插件
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
@@ -10,6 +10,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 // 引用FontAwesome
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faSquare, faCheckSquare, faPhone, faUser as fasUser, faEnvelope as fasEnvelope, faLock, faBuilding, faEye } from '@fortawesome/free-solid-svg-icons';
+// tslint:disable-next-line: max-line-length
 import { faSquare as farSquare, faCheckSquare as farCheckSquare, faUser as farUser, faEnvelope as farEnvelope, faEyeSlash, faEye as farEye } from '@fortawesome/free-regular-svg-icons';
 import { faStackOverflow, faGithub, faMedium, faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
@@ -18,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './hero/in-memory-data.service';
 
-//Routing Module
+// Routing Module
 import { AnimRoutingModule }    from './anim-layer/anim-routing.module';
 import { HeroRoutingModule }    from './hero/hero-routing.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,16 +29,16 @@ import { LifecycleRoutingModule } from './lifecycle/lifecycle-routing.module';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
-//angularx-social-login
+// angularx-social-login
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import { GoogleLoginProvider, FacebookLoginProvider, AmazonLoginProvider,} from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider, AmazonLoginProvider } from 'angularx-social-login';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
-//Bootstrap
+// Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-//Component
+// Component
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { swiperDemoComponent } from './swiperDemo/swiperDemo.component';
@@ -87,8 +88,8 @@ import { SocialComponent } from './social/social.component';
     AnimLayerComponent,
     AnimDetailComponent,
     TempleateComponent,
-    BigHeroDetailComponent, 
-    ClickDirective, 
+    BigHeroDetailComponent,
+    ClickDirective,
     ClickDirective2,
     HeroFormComponent,
     heroSwitchComponents,
@@ -101,17 +102,17 @@ import { SocialComponent } from './social/social.component';
     PeekABooComponent,
     SpyParentComponent,
     SpyDirective,
-    OnChangesParentComponent, 
+    OnChangesParentComponent,
     OnChangesComponent,
-    CounterParentComponent,  
+    CounterParentComponent,
     MyCounterComponent,
-    DoCheckParentComponent, 
+    DoCheckParentComponent,
     DoCheckComponent,
-    AfterContentParentComponent, 
-    AfterContentComponent, 
+    AfterContentParentComponent,
+    AfterContentComponent,
     ChildComponent,
-    AfterViewParentComponent, 
-    AfterViewComponent, 
+    AfterViewParentComponent,
+    AfterViewComponent,
     ChildViewComponent, HighlightDirective, NewComponentComponent, SocialComponent,
   ],
   imports: [
@@ -121,11 +122,11 @@ import { SocialComponent } from './social/social.component';
     TempleateRoutingModule,
     LifecycleRoutingModule,
     AppRoutingModule,
-    BrowserAnimationsModule,    
+    BrowserAnimationsModule,
     NgxUsefulSwiperModule,
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
-    FormsModule,    
+    FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,
@@ -150,7 +151,7 @@ import { SocialComponent } from './social/social.component';
       renderOnClick: false
     }),
     NgbModule,
-    SocialLoginModule,    
+    SocialLoginModule,
     ShareButtonsModule.withConfig({
       debug: true
     }),
@@ -187,7 +188,7 @@ import { SocialComponent } from './social/social.component';
 export class AppModule {
   /* FontAwesome icon */
   constructor(private library: FaIconLibrary) {
-    library.addIcons(faSquare, faCheckSquare, farSquare, farCheckSquare, faStackOverflow, faGithub, faMedium, 
+    library.addIcons(faSquare, faCheckSquare, farSquare, farCheckSquare, faStackOverflow, faGithub, faMedium,
       faTwitter, faFacebook, fasUser, farUser, farEnvelope, fasEnvelope, faPhone, faBuilding, faLock, faEye, farEye, faEyeSlash);
   }
 }
