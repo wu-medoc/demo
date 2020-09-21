@@ -1,27 +1,180 @@
-# Demo
+# Angular 9 / 10 Social Login
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.1.
+[![Gitter](https://badges.gitter.im/angularx-social-login/community.svg)](https://gitter.im/angularx-social-login/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-## Development server
+Social login and authentication module for Angular 9 / 10. Supports authentication with **Google**, **Facebook**, and **Amazon**. Can be extended to other providers also.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Check out the [demo](https://abacritt.github.io/angularx-social-login/).
 
-## Code scaffolding
+> Note: For compatibility with older versions Angular (e.g. Angular 8 and older), please use an older version of the library. Check [this comment on the compatibility with Angular versions](https://github.com/abacritt/angularx-social-login/pull/286#discussion_r449864732) and [this comment on how to use the older version of the library](https://github.com/abacritt/angularx-social-login/issues/283#issuecomment-652930750).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Getting started
 
-## Build
+### Install via npm
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```sh
+npm i angularx-social-login
+```
 
-## Running unit tests
+### Import the module
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+In your `AppModule`, import the `SocialLoginModule`
 
-## Running end-to-end tests
+```javascript
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  AmazonLoginProvider,
+} from 'angularx-social-login';
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+@NgModule({
+  declarations: [
+    ...
+  ],
+  imports: [
+    ...
+    SocialLoginModule
+  ],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              'clientId'
+            ),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId'),
+          },
+          {
+            id: AmazonLoginProvider.PROVIDER_ID,
+            provider: new AmazonLoginProvider(
+              'clientId'
+            ),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    }
+  ],
+  bootstrap: [...]
+})
+export class AppModule { }
+```
 
-## Further help
+### Sign in and out users
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```javascript
+
+import { SocialAuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+
+@Component({
+  selector: 'app-demo',
+  templateUrl: './demo.component.html',
+  styleUrls: ['./demo.component.css']
+})
+export class DemoComponent implements OnInit {
+
+  constructor(private authService: SocialAuthService) { }
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  signOut(): void {
+    this.authService.signOut();
+  }
+
+}
+```
+
+### Subscribe to the authentication state
+
+You are notified when user logs in or logs out. You receive a `SocialUser` object when the user logs in and a `null` when the user logs out. `SocialUser` object contains basic user information such as name, email, photo URL, etc. along with the `auth_token`. You can communicate the `auth_token` to your server to authenticate the user in server and make API calls from server.
+
+```javascript
+import { SocialAuthService } from "angularx-social-login";
+import { SocialUser } from "angularx-social-login";
+
+@Component({
+  selector: 'app-demo',
+  templateUrl: './demo.component.html',
+  styleUrls: ['./demo.component.css']
+})
+export class DemoComponent implements OnInit {
+
+  user: SocialUser;
+  loggedIn: boolean;
+
+  constructor(private authService: AuthService) { }
+
+  ngOnInit() {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
+  }
+
+}
+```
+
+### Display the user information
+
+```html
+<img src="{{ user.photoUrl }}">
+<div>
+  <h4>{{ user.name }}</h4>
+  <p>{{ user.email }}</p>
+</div>
+```
+
+## Specifying custom scopes, fields etc. on initialization
+
+```javascript
+const fbLoginOptions = {
+  scope: 'pages_messaging,pages_messaging_subscriptions,email,pages_show_list,manage_pages',
+  return_scopes: true,
+  enable_profile_selector: true
+}; // https://developers.facebook.com/docs/reference/javascript/FB.login/v2.11
+
+const googleLoginOptions: LoginOpt = {
+  scope: 'profile email'
+}; // https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2clientconfig
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("Google-OAuth-Client-Id", googleLoginOptions)
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("Facebook-App-Id", fbLoginOptions)
+  }
+]);
+```
+
+## Specifying custom scopes, fields etc. on login
+
+```javascript
+const fbLoginOptions = {
+  scope: 'pages_messaging,pages_messaging_subscriptions,email,pages_show_list,manage_pages'
+}; // https://developers.facebook.com/docs/reference/javascript/FB.login/v2.11
+
+this.authService.signIn(FacebookLoginProvider.PROVIDER_ID, fbLoginOptions);
+```
+
+## Running the demo app
+
+```sh
+ng serve
+```
