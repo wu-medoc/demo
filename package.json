@@ -36,6 +36,7 @@
     "@fortawesome/react-fontawesome": "^0.1.11",
     "@ng-bootstrap/ng-bootstrap": "^6.2.0",
     "@nguniversal/express-engine": "^9.1.1",
+    "@types/googlemaps": "^3.39.8",
     "angular-fontawesome": "^1.0.0",
     "angular-in-memory-web-api": "^0.11.0",
     "angularx-social-login": "^3.2.1",
