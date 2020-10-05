@@ -20,8 +20,8 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './hero/in-memory-data.service';
 
 // Routing Module
-import { AnimRoutingModule }    from './anim-layer/anim-routing.module';
-import { HeroRoutingModule }    from './hero/hero-routing.module';
+import { AnimRoutingModule } from './anim-layer/anim-routing.module';
+import { HeroRoutingModule } from './hero/hero-routing.module';
 import { AppRoutingModule } from './app-routing.module';
 import { TempleateRoutingModule } from './templeate/templeate-routing.module';
 import { LifecycleRoutingModule } from './lifecycle/lifecycle-routing.module';
@@ -38,6 +38,9 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 // Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// google maps
+import { AgmCoreModule } from '@agm/core';
+
 // Component
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -46,7 +49,7 @@ import { HeroTestComponent } from './hero/heroTest/heroTest.component';
 import { HeroMenuComponent } from './hero/hero-menu/hero-menu.component';
 import { formUIComponent } from './formUI/formUI.component';
 import { HeroDetailComponent } from './hero/hero-detail/hero-detail.component';
-import { MessagesComponent }    from './hero/messages/messages.component';
+import { MessagesComponent } from './hero/messages/messages.component';
 import { HeroesComponent } from './hero/heroes/heroes.component';
 import { FontawesomeIconComponent } from './fontawesome-icon/fontawesome-icon.component';
 import { AnimLayerComponent } from './anim-layer/anim-layer.component';
@@ -72,6 +75,8 @@ import { AfterViewParentComponent, AfterViewComponent, ChildViewComponent} from 
 import { HighlightDirective } from './highlight.directive';
 import { NewComponentComponent } from './new-component/new-component.component';
 import { SocialComponent } from './social/social.component';
+import { SortpageComponent } from './sortpage/sortpage.component';
+import { MapsComponent } from './maps/maps.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +118,7 @@ import { SocialComponent } from './social/social.component';
     ChildComponent,
     AfterViewParentComponent,
     AfterViewComponent,
-    ChildViewComponent, HighlightDirective, NewComponentComponent, SocialComponent,
+    ChildViewComponent, HighlightDirective, NewComponentComponent, SocialComponent, SortpageComponent, MapsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -156,6 +161,10 @@ import { SocialComponent } from './social/social.component';
       debug: true
     }),
     ShareIconsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB0XQBqNsHt-g1VJEqVCrW7uG0tpMMS9sc',
+      language: 'zh-TW'
+    }),
   ],
   providers: [
     {
