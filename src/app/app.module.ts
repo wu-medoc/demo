@@ -40,6 +40,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // google maps
 import { AgmCoreModule } from '@agm/core';
+import { GoogleMapsAPIWrapper} from '@agm/core';
+import { MarkersService } from './maps/markers.service';
 
 // Component
 import { AppComponent } from './app.component';
@@ -77,6 +79,7 @@ import { NewComponentComponent } from './new-component/new-component.component';
 import { SocialComponent } from './social/social.component';
 import { SortpageComponent } from './sortpage/sortpage.component';
 import { MapsComponent } from './maps/maps.component';
+
 
 @NgModule({
   declarations: [
@@ -190,7 +193,9 @@ import { MapsComponent } from './maps/maps.component';
           // },
         ],
       } as SocialAuthServiceConfig,
-    }
+    },
+    MarkersService,
+    GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent]
 })

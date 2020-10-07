@@ -1,2 +1,31 @@
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoomValue">
+
+<div class="explore-swiper">
+  <swiper class="explore-map swiper-container" [config]="infoCard" #usefulSwiper>
+      <div id="info-card" class="swiper-wrapper">
+          <div *ngFor="let spot of markers" class="swiper-slide">
+              <div class="card-item sm">
+                  <div class="info-box">
+                      <ul class="info-list">
+                          <li class="info-name">{{spot?.name}}</li>
+                          <li>
+                            {{spot?.lat}} / {{spot?.lng}}
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </swiper>
+</div>
+
+<agm-map #AgmMap [latitude]="lat" [longitude]="lng" [zoom]="zoomValue" (mapReady)="onMapReady($event)" (idle)="mapIdle()">
+  <agm-marker  [latitude]="lat" [longitude]="lng" [iconUrl]="userUrl"></agm-marker>
+  <agm-marker *ngFor="let p of markers; let i = index" [latitude]="p.lat" [longitude]="p.lng"
+  [iconUrl]="'../../../img/callcar/map/' + p.type + '.svg'"
+  (markerClick)="selectSpot(i)"></agm-marker>
+  <agm-info-window *ngFor="let Area of markers;" [latitude]="Area?.lat+0.00049" [longitude]="Area?.lng"
+    [isOpen]="openedWindow === Area?.id? true : false">
+    <h5>{{Area?.name}}</h5>
+    <p>目前所選</p>
+  </agm-info-window>
 </agm-map>
