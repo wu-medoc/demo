@@ -25,9 +25,9 @@ export class MapsComponent implements OnInit, AfterViewInit {
   /** 視圖倍率 */
   zoomValue = 15;
   /** 使用者所在地 icon */
-  userUrl = '../../../img/callcar/map/user.svg';
+  userUrl = 'https://wu-medoc.github.io/demo/img/callcar/map/user.svg';
   /** 景點 icon */
-  iconUrl = '../../../img/callcar/map/location.svg';
+  iconUrl = 'https://wu-medoc.github.io/demo/img/callcar/map/location.svg';
   /** 目前所顯示資訊小窗編碼 */
   public openedWindow = 0; // alternative: array of numbers
   /** 目前所選景點 */
