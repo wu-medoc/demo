@@ -15,7 +15,7 @@ declare var $: any;
 })
 
 export class AppComponent {
-  
+
   /** 列表選單 */
   public boxTabs : SwiperOptions = {
     pagination: { el: '.swiper-pagination', clickable: true },
@@ -46,11 +46,11 @@ export class AppComponent {
   public transX = '';
 
   prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 
   toggleAnimations() {
     this.animationsDisabled = !this.animationsDisabled;
-  }  
+  }
 }
 

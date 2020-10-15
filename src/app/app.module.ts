@@ -75,7 +75,6 @@ import { DoCheckParentComponent, DoCheckComponent } from './lifecycle/do-check.c
 import { AfterContentParentComponent, AfterContentComponent, ChildComponent } from './lifecycle/after-content.component';
 import { AfterViewParentComponent, AfterViewComponent, ChildViewComponent} from './lifecycle/after-view.component';
 import { HighlightDirective } from './highlight.directive';
-import { NewComponentComponent } from './new-component/new-component.component';
 import { SocialComponent } from './social/social.component';
 import { SortpageComponent } from './sortpage/sortpage.component';
 import { MapsComponent } from './maps/maps.component';
@@ -121,7 +120,11 @@ import { MapsComponent } from './maps/maps.component';
     ChildComponent,
     AfterViewParentComponent,
     AfterViewComponent,
-    ChildViewComponent, HighlightDirective, NewComponentComponent, SocialComponent, SortpageComponent, MapsComponent,
+    ChildViewComponent,
+    HighlightDirective,
+    SocialComponent,
+    SortpageComponent,
+    MapsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
