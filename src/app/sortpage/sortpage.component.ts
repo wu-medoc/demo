@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { moreData, mySerivce } from '../interfaceData';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { SortablejsOptions } from 'ngx-sortablejs/lib/sortablejs-options';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-sortpage',
@@ -72,6 +73,10 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     }, []);
   }
 
+
+  constructor(private location: Location, private http: HttpClient, private elementRef: ElementRef) {
+  }
+
   /** href disabled */
   disabled(event?: MouseEvent) {
     event.preventDefault();
@@ -101,17 +106,16 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // tslint:disable-next-line: variable-name 返回鍵使用
-  constructor(private _location: Location) {
-  }
 
+  // 返回鍵
   backClicked() {
-    this._location.back();
+    this.location.back();
   }
 
   ngOnInit() {
     // console.log(this.groupCategary);
   }
   ngAfterViewInit() {
+    this.elementRef.nativeElement.querySelector('.mysvc').addEventListener('click', this.serviceClick.bind(this));
   }
 }
