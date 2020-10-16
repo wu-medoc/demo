@@ -42,6 +42,7 @@ export class SortpageComponent implements OnInit, AfterViewInit {
 
   /** 更多服務按鈕增減 */
   serviceClick(code: number, action: boolean) {
+    this.options = { onUnchoose: (evt) => evt.stopPropagation() };
     this.noticeNine = this.moreMy.length === 9 ? true : false;
     this.noticeFour = this.moreMy.length === 4 ? true : false;
     // 判斷被點擊的ICON是否已經在我的服務內
@@ -74,7 +75,6 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   /** href disabled */
   disabled(event?: MouseEvent) {
     event.preventDefault();
-    console.log(event);
   }
 
   /** editFunctionToggle */
