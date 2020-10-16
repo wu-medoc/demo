@@ -1,6 +1,7 @@
-import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { moreData, mySerivce } from '../interfaceData';
 import {Location} from '@angular/common';
+import { SortablejsOptions } from 'ngx-sortablejs/lib/sortablejs-options';
 
 @Component({
   selector: 'app-sortpage',
@@ -8,16 +9,25 @@ import {Location} from '@angular/common';
   styleUrls: ['./sortpage.component.css', '../../dist/style/home.min.css']
 })
 export class SortpageComponent implements OnInit, AfterViewInit {
+  [x: string]: any;
+  /** 服務資料初始 */
   moreList = moreData;
-  moreMy = mySerivce;
+  moreMy = mySerivce.concat();
+  moreOg = mySerivce.concat();
   /** 我的服務編輯狀態 */
   public editFunction = false;
-  /** 我的服務-加減class(remove-item:isAdd=false, add-item:isAdd=true) */
-  isAdd = false;
   /** 我的服務-數量提醒最少4個 */
   public noticeFour = false;
   /** 我的服務-數量提醒最多9個 */
   public noticeNine = false;
+  /** 我的服務-加減class(remove-item:isAdd=false, add-item:isAdd=true) */
+  isAdd = false;
+
+  // tslint:disable-next-line: deprecation
+  options: SortablejsOptions = {
+    disabled: true,
+    group: '.link-item',
+  };
 
   /** Function_CategaryCode排序 */
   svCategary = moreData.sort((a, b) => a.Function_CategaryCode - b.Function_CategaryCode);
@@ -32,8 +42,6 @@ export class SortpageComponent implements OnInit, AfterViewInit {
 
   /** 更多服務按鈕增減 */
   serviceClick(code: number, action: boolean) {
-    console.log(code, action);
-
     this.noticeNine = this.moreMy.length === 9 ? true : false;
     this.noticeFour = this.moreMy.length === 4 ? true : false;
     // 判斷被點擊的ICON是否已經在我的服務內
@@ -69,15 +77,41 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     console.log(event);
   }
 
+  /** editFunctionToggle */
+  editFunctionToggle() {
+    this.editFunction = !this.editFunction;
+    this.options = {
+      group: '.link-item',
+      disabled: false,
+      onUpdate: () => this.moreMy,
+    };
+  }
+
+  /** 更新我的服務 */
+  updateUserService(): void {
+    this.editFunction = false;
+    // 如果我的服務沒有修改，不用save
+    if ( JSON.stringify(this.moreOg) !== JSON.stringify(this.moreMy)) {
+      this.moreOg.length = 0;
+      this.moreMy.forEach(code => {
+        this.moreOg.push(code);
+      });
+    }else{
+      this.moreOg = mySerivce.concat();
+    }
+  }
+
   // tslint:disable-next-line: variable-name 返回鍵使用
-  constructor(private _location: Location, private elementRef: ElementRef) { }
+  constructor(private _location: Location) {
+  }
+
   backClicked() {
     this._location.back();
   }
-  ngOnInit(): void {
-    console.log(this.groupCategary);
-  }
 
+  ngOnInit() {
+    // console.log(this.groupCategary);
+  }
   ngAfterViewInit() {
   }
 }

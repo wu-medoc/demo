@@ -43,6 +43,9 @@ import { AgmCoreModule } from '@agm/core';
 import { GoogleMapsAPIWrapper} from '@agm/core';
 import { MarkersService } from './maps/markers.service';
 
+// SortablejsModule
+import { SortablejsModule } from 'ngx-sortablejs';
+
 // Component
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -171,6 +174,7 @@ import { MapsComponent } from './maps/maps.component';
       apiKey: 'AIzaSyB0XQBqNsHt-g1VJEqVCrW7uG0tpMMS9sc',
       language: 'zh-TW'
     }),
+    SortablejsModule,
   ],
   providers: [
     {
