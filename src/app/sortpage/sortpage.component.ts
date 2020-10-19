@@ -43,8 +43,8 @@ export class SortpageComponent implements OnInit, AfterViewInit {
 
   /** 更多服務按鈕增減 */
   serviceClick(code: number, action: boolean) {
-    console.log(code, action);
-    this.options = { onUnchoose: (evt) => evt.stopPropagation() };
+    // console.log(code, action);
+    // this.options = { onUnchoose: (evt) => evt.stopPropagation() };
     this.noticeNine = this.moreMy.length === 9 ? true : false;
     this.noticeFour = this.moreMy.length === 4 ? true : false;
     // 判斷被點擊的ICON是否已經在我的服務內
@@ -86,11 +86,14 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   /** editFunctionToggle */
   editFunctionToggle() {
     this.editFunction = !this.editFunction;
-    this.options = {
-      group: '.link-item',
-      disabled: false,
-      onUpdate: () => this.moreMy,
-    };
+    if (this.editFunction === true){
+      this.options = {
+        group: '.link-item',
+        disabled: false,
+        onClick: () => this.serviceClick(this.Function_ID, false),
+        onUpdate: () => this.moreMy,
+      };
+    }
   }
 
   /** 更新我的服務 */
