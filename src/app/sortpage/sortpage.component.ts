@@ -118,7 +118,7 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     // this.elementRef.nativeElement.querySelector('.mysvc').addEventListener('click', this.elementRef.nativeElement.bind(this));
-    $('.sortable-chosen').on('touchstart click', (event) => {
+    this.elementRef.nativeElement.querySelector('.sortable-chosen').on('touchstart click', (event) => {
       if ( event.type === 'touchstart' ) {
         this.serviceClick(this.Function_ID, false);
       }
