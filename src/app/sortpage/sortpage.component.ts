@@ -43,6 +43,7 @@ export class SortpageComponent implements OnInit, AfterViewInit {
 
   /** 更多服務按鈕增減 */
   serviceClick(code: number, action: boolean) {
+    console.log(code, action);
     this.options = { onUnchoose: (evt) => evt.stopPropagation() };
     this.noticeNine = this.moreMy.length === 9 ? true : false;
     this.noticeFour = this.moreMy.length === 4 ? true : false;
@@ -116,6 +117,11 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     // console.log(this.groupCategary);
   }
   ngAfterViewInit() {
-    this.elementRef.nativeElement.querySelector('.mysvc').addEventListener('click', this.serviceClick.bind(this));
+    // this.elementRef.nativeElement.querySelector('.mysvc').addEventListener('click', this.elementRef.nativeElement.bind(this));
+    $('.sortable-chosen').on('touchstart click', (event) => {
+      if ( event.type === 'touchstart' ) {
+        this.serviceClick(this.Function_ID, false);
+      }
+    });
   }
 }
