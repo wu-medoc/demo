@@ -85,20 +85,21 @@ export class SortpageComponent implements OnInit, AfterViewInit {
 
   /** editFunctionToggle */
   editFunctionToggle() {
-    this.editFunction = !this.editFunction;
-    if (this.editFunction === true){
-      this.options = {
-        group: '.link-item',
-        disabled: false,
-        onClick: () => this.serviceClick(this.Function_ID, false),
-        onUpdate: () => this.moreMy,
-      };
-    }
+    this.editFunction = true;
+    this.options = {
+      group: '.link-item',
+      disabled: false,
+      onClick: () => this.serviceClick(this.Function_ID, false),
+      onUpdate: () => this.moreMy,
+    };
   }
 
   /** 更新我的服務 */
   updateUserService(): void {
     this.editFunction = false;
+    this.options = {
+      disabled: true,
+    };
     // 如果我的服務沒有修改，不用save
     if ( JSON.stringify(this.moreOg) !== JSON.stringify(this.moreMy)) {
       this.moreOg.length = 0;
@@ -110,6 +111,14 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /** 取消更新我的服務 */
+
+  cancelUserService(): void {
+    this.editFunction = false;
+    this.options = {
+      disabled: true,
+    };
+  }
 
   // 返回鍵
   backClicked() {
