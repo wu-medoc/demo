@@ -13,7 +13,7 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   [x: string]: any;
   /** 服務資料初始 */
   moreList = moreData;
-  moreMy = mySerivce.concat();
+  public moreMy = mySerivce.concat();
   moreOg = mySerivce.concat();
   /** 我的服務編輯狀態 */
   public editFunction = false;
@@ -28,6 +28,23 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   options: SortablejsOptions = {
     disabled: true,
     group: '.link-item',
+    onUpdate: () => this.moreMy,
+    onUnchoose: (evt) => {
+      console.log(evt);
+      if (this.moreMy.length === 4){ return this.noticeFour = true ; }
+      if (this.moreMy.length > 4){
+        this.moreMy.splice(evt.oldIndex, 1);
+        // 根據我的服務清單，修改下面更多服務的class狀態
+        this.groupCategary = this.svCategary.reduce((r, { Function_CategaryName: name, ...object }) => {
+          let temp = r.find(o => o.name === name);
+          if (!temp) { r.push(temp = { name, children: [] }); }
+          // tslint:disable-next-line: max-line-length
+          ((this.moreMy.filter( exclude => exclude.Function_ID === object.Function_ID)).length > 0) ? this.isAdd = true : this.isAdd = false;
+          temp.children.push({ object, isAdd: this.isAdd });
+          return r;
+        }, []);
+      }
+    },
   };
 
   /** Function_CategaryCode排序 */
@@ -41,10 +58,9 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     return r;
   }, []);
 
-  /** 更多服務按鈕增減 */
-  serviceClick(code: number, action: boolean) {
-    // console.log(code, action);
-    // this.options = { onUnchoose: (evt) => evt.stopPropagation() };
+
+  /** 更多服務按鈕增減 for #moreServiceList */
+  serviceClick(code: number, action: boolean, ev: any) {
     this.noticeNine = this.moreMy.length === 9 ? true : false;
     this.noticeFour = this.moreMy.length === 4 ? true : false;
     // 判斷被點擊的ICON是否已經在我的服務內
@@ -58,9 +74,8 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     } else {
       // 不在我的服務內且數量<9，就在我的服務增加這個ICON
       if (this.moreMy.length < 9) {
-      const add = this.moreList.filter(item => item.Function_ID === code)
-      .filter(item => item.Function_ID === code)[0];
-      this.moreMy.push(add);
+      const add = this.moreList.filter(item => item.Function_ID === code)[0];
+      if (add !== undefined) { this.moreMy.push(add); }
       this.noticeFour = false;
       }
     }
@@ -73,7 +88,6 @@ export class SortpageComponent implements OnInit, AfterViewInit {
       return r;
     }, []);
   }
-
 
   constructor(private location: Location, private http: HttpClient, private elementRef: ElementRef) {
   }
@@ -89,8 +103,6 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     this.options = {
       group: '.link-item',
       disabled: false,
-      onClick: () => this.serviceClick(this.Function_ID, false),
-      onUpdate: () => this.moreMy,
     };
   }
 
@@ -130,10 +142,5 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     // this.elementRef.nativeElement.querySelector('.mysvc').addEventListener('click', this.elementRef.nativeElement.bind(this));
-    this.elementRef.nativeElement.querySelector('.sortable-chosen').on('touchstart click', (event) => {
-      if ( event.type === 'touchstart' ) {
-        this.serviceClick(this.Function_ID, false);
-      }
-    });
   }
 }
