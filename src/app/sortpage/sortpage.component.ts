@@ -10,7 +10,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   styleUrls: ['./sortpage.component.css', '../../dist/style/home.min.css']
 })
 export class SortpageComponent implements OnInit, AfterViewInit {
-  [x: string]: any;
   /** 服務資料初始 */
   moreList = moreData;
   public moreMy = mySerivce.concat();
@@ -23,6 +22,7 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   public noticeNine = false;
   /** 我的服務-加減class(remove-item:isAdd=false, add-item:isAdd=true) */
   isAdd = false;
+  isClick = false;
 
   // tslint:disable-next-line: deprecation
   options: SortablejsOptions = {
@@ -30,26 +30,7 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     animation: 150,
     handle: '#myService',
     draggable: '.mysvc',
-    group: '.mysvc',
-    onUnchoose: (evt) => {
-      if (this.moreMy.length === 4){ return this.noticeFour = true ; }
-      if (this.moreMy.length > 4){
-        if (evt.clone === null){
-          this.moreMy.splice(evt.oldIndex, 1);
-          this.noticeFour = false ;
-          this.noticeNine = false ;
-          // 根據我的服務清單，修改下面更多服務的class狀態
-          this.groupCategary = this.svCategary.reduce((r, { Function_CategaryName: name, ...object }) => {
-            let temp = r.find(o => o.name === name);
-            if (!temp) { r.push(temp = { name, children: [] }); }
-            // tslint:disable-next-line: max-line-length
-            ((this.moreMy.filter( exclude => exclude.Function_ID === object.Function_ID)).length > 0) ? this.isAdd = true : this.isAdd = false;
-            temp.children.push({ object, isAdd: this.isAdd });
-            return r;
-          }, []);
-        }
-      }
-    },
+    group: '.mysvc'
   };
 
   /** Function_CategaryCode排序 */
@@ -62,10 +43,16 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     temp.children.push({ object, isAdd: this.isAdd });
     return r;
   }, []);
-
-
+  /** 更多服務按鈕增減 暫停srotableJS */
+  moreMyClick(event: any, action: boolean) {
+    this.isClick = !this.isClick;
+    this.options = {
+      disabled: this.isClick,
+    };
+  }
   /** 更多服務按鈕增減 for #moreServiceList */
   serviceClick(code: number, action: boolean) {
+    console.log(this);
     this.noticeNine = this.moreMy.length === 9 ? true : false;
     this.noticeFour = this.moreMy.length === 4 ? true : false;
     // 判斷被點擊的ICON是否已經在我的服務內
