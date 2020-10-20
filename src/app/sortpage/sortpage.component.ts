@@ -26,7 +26,6 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line: deprecation
   options: SortablejsOptions = {
     disabled: true,
-    animation: 150,
     handle: '#myService',
     draggable: '.mysvc',
     group: '.mysvc',
