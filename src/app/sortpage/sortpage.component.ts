@@ -35,18 +35,20 @@ export class SortpageComponent implements OnInit, AfterViewInit {
       if (this.moreMy.length === 4){ return this.noticeFour = true ; }
       const result = this.moreMy.findIndex(item => item.Function_ID === id);
       if (this.moreMy.length > 4) {
-        this.moreMy.splice(result, 1);
-        this.noticeFour = false ;
-        this.noticeNine = false ;
-        // 根據我的服務清單，修改下面更多服務的class狀態
-        this.groupCategary = this.svCategary.reduce((r, { Function_CategaryName: name, ...object }) => {
-          let temp = r.find(o => o.name === name);
-          if (!temp) { r.push(temp = { name, children: [] }); }
-          // tslint:disable-next-line: max-line-length
-          ((this.moreMy.filter( exclude => exclude.Function_ID === object.Function_ID)).length > 0) ? this.isAdd = true : this.isAdd = false;
-          temp.children.push({ object, isAdd: this.isAdd });
-          return r;
-        }, []);
+        if (result > -1) {
+          this.moreMy.splice(result, 1);
+          this.noticeFour = false ;
+          this.noticeNine = false ;
+          // 根據我的服務清單，修改下面更多服務的class狀態
+          this.groupCategary = this.svCategary.reduce((r, { Function_CategaryName: name, ...object }) => {
+            let temp = r.find(o => o.name === name);
+            if (!temp) { r.push(temp = { name, children: [] }); }
+            // tslint:disable-next-line: max-line-length
+            ((this.moreMy.filter( exclude => exclude.Function_ID === object.Function_ID)).length > 0) ? this.isAdd = true : this.isAdd = false;
+            temp.children.push({ object, isAdd: this.isAdd });
+            return r;
+          }, []);
+        }
       }
     },
   };
