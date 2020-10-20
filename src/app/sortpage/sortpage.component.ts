@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { moreData, mySerivce } from '../interfaceData';
 import { Location } from '@angular/common';
 import { SortablejsOptions } from 'ngx-sortablejs/lib/sortablejs-options';
@@ -27,9 +27,29 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line: deprecation
   options: SortablejsOptions = {
     disabled: true,
+    animation: 150,
     handle: '#myService',
     draggable: '.mysvc',
     group: '.mysvc',
+    onUnchoose: (evt) => {
+      if (this.moreMy.length === 4){ return this.noticeFour = true ; }
+      if (this.moreMy.length > 4){
+        if (evt.clone === null){
+          this.moreMy.splice(evt.oldIndex, 1);
+          this.noticeFour = false ;
+          this.noticeNine = false ;
+          // 根據我的服務清單，修改下面更多服務的class狀態
+          this.groupCategary = this.svCategary.reduce((r, { Function_CategaryName: name, ...object }) => {
+            let temp = r.find(o => o.name === name);
+            if (!temp) { r.push(temp = { name, children: [] }); }
+            // tslint:disable-next-line: max-line-length
+            ((this.moreMy.filter( exclude => exclude.Function_ID === object.Function_ID)).length > 0) ? this.isAdd = true : this.isAdd = false;
+            temp.children.push({ object, isAdd: this.isAdd });
+            return r;
+          }, []);
+        }
+      }
+    },
   };
 
   /** Function_CategaryCode排序 */
@@ -72,14 +92,6 @@ export class SortpageComponent implements OnInit, AfterViewInit {
       temp.children.push({ object, isAdd: this.isAdd });
       return r;
     }, []);
-  }
-
-  @HostListener('click', ['$event'])
-  onClick(event?: MouseEvent) {
-        event.stopPropagation();
-        event.preventDefault();
-        event.cancelBubble = true;
-        event.stopImmediatePropagation();
   }
 
   constructor(private location: Location, private http: HttpClient, private elementRef: ElementRef) {
