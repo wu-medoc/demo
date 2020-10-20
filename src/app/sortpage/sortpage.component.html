@@ -42,7 +42,8 @@
       </div>
       <div class="service-title">
         <div class="main-link edit-link sort-block" id="myService" [sortablejs]="moreMy" [sortablejsOptions]="options">
-          <div class="link-item mysvc remove-item" *ngFor="let icon of moreMy" [id]='icon.Function_ID'>
+          <div class="link-item mysvc remove-item" *ngFor="let icon of moreMy"
+          (click)="editFunction ? serviceClick(icon.Function_ID, false) : null;">
             <a [class.disabled]="editFunction ? true : false" [href]="icon.Function_URL" (click)="editFunction ?disabled($event): null;" rel="noopener noreferrer">
               <img [src]="icon.Function_Icon" alt="">
               <p>{{icon.Function_Name}}</p>
@@ -64,7 +65,7 @@
       <div class="title-item pt-3">{{item.name}}</div>
       <div class="main-link edit-link">
         <div *ngFor="let itemChid of item.children" class="link-item"
-        (click)="editFunction ? serviceClick(itemChid.object.Function_ID, itemChid.isAdd, null) : null;"
+        (click)="editFunction ? serviceClick(itemChid.object.Function_ID, itemChid.isAdd) : null;"
         [ngClass]="{'remove-item': itemChid.isAdd && itemChid.object.Function_IsActive, 'add-item':!itemChid.isAdd && itemChid.object.Function_IsActive,'disable' : itemChid.object.Function_IsActive === 0}">
           <a [class.disabled]="editFunction ? true : false" [href]="itemChid.object.Function_URL" (click)="editFunction ?disabled($event): null;" rel="noopener noreferrer">
               <div class="img-box">

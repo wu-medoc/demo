@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, HostListener } from '@angular/core';
 import { moreData, mySerivce } from '../interfaceData';
 import { Location } from '@angular/common';
 import { SortablejsOptions } from 'ngx-sortablejs/lib/sortablejs-options';
@@ -27,24 +27,9 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line: deprecation
   options: SortablejsOptions = {
     disabled: true,
-    group: '.link-item',
-    onUpdate: () => this.moreMy,
-    onUnchoose: (evt) => {
-      console.log(evt);
-      if (this.moreMy.length === 4){ return this.noticeFour = true ; }
-      if (this.moreMy.length > 4){
-        this.moreMy.splice(evt.oldIndex, 1);
-        // 根據我的服務清單，修改下面更多服務的class狀態
-        this.groupCategary = this.svCategary.reduce((r, { Function_CategaryName: name, ...object }) => {
-          let temp = r.find(o => o.name === name);
-          if (!temp) { r.push(temp = { name, children: [] }); }
-          // tslint:disable-next-line: max-line-length
-          ((this.moreMy.filter( exclude => exclude.Function_ID === object.Function_ID)).length > 0) ? this.isAdd = true : this.isAdd = false;
-          temp.children.push({ object, isAdd: this.isAdd });
-          return r;
-        }, []);
-      }
-    },
+    handle: '#myService',
+    draggable: '.mysvc',
+    group: '.mysvc',
   };
 
   /** Function_CategaryCode排序 */
@@ -60,7 +45,7 @@ export class SortpageComponent implements OnInit, AfterViewInit {
 
 
   /** 更多服務按鈕增減 for #moreServiceList */
-  serviceClick(code: number, action: boolean, ev: any) {
+  serviceClick(code: number, action: boolean) {
     this.noticeNine = this.moreMy.length === 9 ? true : false;
     this.noticeFour = this.moreMy.length === 4 ? true : false;
     // 判斷被點擊的ICON是否已經在我的服務內
@@ -89,6 +74,14 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     }, []);
   }
 
+  @HostListener('click', ['$event'])
+  onClick(event?: MouseEvent) {
+        event.stopPropagation();
+        event.preventDefault();
+        event.cancelBubble = true;
+        event.stopImmediatePropagation();
+  }
+
   constructor(private location: Location, private http: HttpClient, private elementRef: ElementRef) {
   }
 
@@ -101,7 +94,6 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   editFunctionToggle() {
     this.editFunction = true;
     this.options = {
-      group: '.link-item',
       disabled: false,
     };
   }
