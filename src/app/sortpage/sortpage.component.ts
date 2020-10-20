@@ -30,10 +30,12 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     draggable: '.mysvc',
     group: '.mysvc',
     onUnchoose: (evt) => {
+      // tslint:disable-next-line: radix
+      const id = parseInt(evt.item.id);
       if (this.moreMy.length === 4){ return this.noticeFour = true ; }
-      const result = this.moreMy.findIndex(item => item.Function_ID === evt.item.id);
-      if (result > -1 && this.moreMy.length > 4) {
-        this.moreMy.splice(evt.item.id, 1);
+      const result = this.moreMy.findIndex(item => item.Function_ID === id);
+      if (this.moreMy.length > 4) {
+        this.moreMy.splice(result, 1);
         this.noticeFour = false ;
         this.noticeNine = false ;
         // 根據我的服務清單，修改下面更多服務的class狀態
