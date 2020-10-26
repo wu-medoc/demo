@@ -42,8 +42,9 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     },
   };
 
-  /** Function_CategaryCode排序 */
+  /** 變更class加減符號 */
   sortClass() {
+    /** Function_CategaryCode排序 */
     const svCategary = moreData.sort((a, b) => a.Function_CategaryCode - b.Function_CategaryCode);
     /** Function_CategaryName群組 */
     this.groupCategary = svCategary.reduce((r, { Function_CategaryName: name, ...object }) => {
