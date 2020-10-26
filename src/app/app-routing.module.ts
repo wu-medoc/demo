@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'formUI', component: formUIComponent, data: {animation: 'formUIPage'} },
   { path: 'icon', component: FontawesomeIconComponent, data: {animation: 'iconPage'} },
   { path: 'heroExp', component: HeroTestComponent, data: {animation: 'heroPage'} },
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: '', pathMatch: 'full', redirectTo: 'sort' },
 ];
 
 @NgModule({

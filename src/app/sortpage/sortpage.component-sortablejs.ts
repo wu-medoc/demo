@@ -1,8 +1,8 @@
-import { Component, OnInit, AfterViewInit, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { moreData, mySerivce } from '../interfaceData';
 import { Location } from '@angular/common';
+import { SortablejsOptions } from 'ngx-sortablejs/lib/sortablejs-options';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { SortablejsOptions } from 'ngx-sortablejs';
 
 @Component({
   selector: 'app-sortpage',
@@ -22,14 +22,40 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   public noticeNine = false;
   /** 我的服務-加減class(remove-item:isAdd=false, add-item:isAdd=true) */
   isAdd = false;
-  isClick = false;
-  pressed: any = {};
+
   // tslint:disable-next-line: deprecation
   options: SortablejsOptions = {
     disabled: true,
     handle: '#myService',
     draggable: '.mysvc',
-    group: '.mysvc'
+    group: '.mysvc',
+    onSort: (evt) => {
+      evt.stopPropagation();
+    },
+    onUnchoose: (evt) => {
+      // tslint:disable-next-line: radix
+      const id = parseInt(evt.item.id);
+      evt.stopPropagation();
+      // console.log(evt);
+      if (this.moreMy.length === 4){ return this.noticeFour = true ; }
+      const result = this.moreMy.findIndex(item => item.Function_ID === id);
+      if (this.moreMy.length > 4) {
+        if (result > -1) {
+          this.moreMy.splice(result, 1);
+          this.noticeFour = false ;
+          this.noticeNine = false ;
+          // 根據我的服務清單，修改下面更多服務的class狀態
+          this.groupCategary = this.svCategary.reduce((r, { Function_CategaryName: name, ...object }) => {
+            let temp = r.find(o => o.name === name);
+            if (!temp) { r.push(temp = { name, children: [] }); }
+            // tslint:disable-next-line: max-line-length
+            ((this.moreMy.filter( exclude => exclude.Function_ID === object.Function_ID)).length > 0) ? this.isAdd = true : this.isAdd = false;
+            temp.children.push({ object, isAdd: this.isAdd });
+            return r;
+          }, []);
+        }
+      }
+    },
   };
 
   /** Function_CategaryCode排序 */
@@ -42,38 +68,6 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     temp.children.push({ object, isAdd: this.isAdd });
     return r;
   }, []);
-
-  /** 拖曳觸發 */
-  sortItem($event: any, code: number) {
-    // console.log($event.target);
-    $event.preventDefault();
-    $event.stopPropagation();
-    if (this.editFunction === true){
-      $event.target.addEventListener('click', (ev) => {
-        this.options = {
-          disabled: true,
-        };
-        // console.log(ev);
-        this.serviceClick(code, false);
-        this.isClick = true;
-      });
-      $event.target.addEventListener('touchmove', (ev) => {
-        this.options = {
-          disabled: false,
-        };
-      });
-      if (this.isClick === true) {
-        this.options = {
-          disabled: true,
-        };
-      }else{
-        this.options = {
-          disabled: false,
-        };
-      }
-    }
-  }
-
   /** 更多服務按鈕增減 for #moreServiceList */
   serviceClick(code: number, action: boolean) {
     this.noticeNine = this.moreMy.length === 9 ? true : false;
@@ -115,11 +109,17 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   /** editFunctionToggle */
   editFunctionToggle() {
     this.editFunction = true;
+    this.options = {
+      disabled: false,
+    };
   }
 
   /** 更新我的服務 */
   updateUserService(): void {
     this.editFunction = false;
+    this.options = {
+      disabled: true,
+    };
     // 如果我的服務沒有修改，不用save
     if ( JSON.stringify(this.moreOg) !== JSON.stringify(this.moreMy)) {
       this.moreOg.length = 0;
@@ -135,6 +135,9 @@ export class SortpageComponent implements OnInit, AfterViewInit {
 
   cancelUserService(): void {
     this.editFunction = false;
+    this.options = {
+      disabled: true,
+    };
   }
 
   // 返回鍵
