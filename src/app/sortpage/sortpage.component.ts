@@ -58,12 +58,6 @@ export class SortpageComponent implements OnInit, AfterViewInit {
         this.isClick = true;
       });
     }
-
-    $event.target.addEventListener('touchmove', (ev) => {
-      this.options = {
-        disabled: false,
-      };
-    });
     if (this.isClick === true) {
       this.options = {
         disabled: true,
@@ -71,6 +65,16 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     }else{
       this.isClick = false;
     }
+    $event.target.addEventListener('touchmove', (ev) => {
+      this.options = {
+        disabled: false,
+      };
+    });
+    $event.target.addEventListener('touchend', (ev) => {
+      this.options = {
+        disabled: true,
+      };
+    });
   }
 
   /** 更多服務按鈕增減 for #moreServiceList */
