@@ -57,20 +57,19 @@ export class SortpageComponent implements OnInit, AfterViewInit {
         this.serviceClick(code, false);
         this.isClick = true;
       });
-      $event.target.addEventListener('touchmove', (ev) => {
-        this.options = {
-          disabled: false,
-        };
-      });
-      if (this.isClick === true) {
-        this.options = {
-          disabled: true,
-        };
-      }else{
-        this.options = {
-          disabled: false,
-        };
-      }
+    }
+
+    $event.target.addEventListener('touchmove', (ev) => {
+      this.options = {
+        disabled: false,
+      };
+    });
+    if (this.isClick === true) {
+      this.options = {
+        disabled: true,
+      };
+    }else{
+      this.isClick = false;
     }
   }
 
