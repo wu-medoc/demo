@@ -29,18 +29,19 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     handle: '#myService',
     draggable: '.mysvc',
     group: '.mysvc',
-    onChoose: (evt) => {
+    onStart: (evt) => {
       evt.preventDefault();
-      // evt.stopPropagation();
-      this.sortClass();
-      console.log('S', evt.item.id, this.moreMy);
+      evt.stopPropagation();
+      // console.log('S', evt.item.id, this.moreMy);
     },
-    onUnchoose: (evt) => {
-      if (evt.originalEvent.defaultPrevented === false){
-        // tslint:disable-next-line: radix
-        this.serviceClick(parseInt(evt.item.id), false);
-      }
-      // console.log('M', evt, this.moreMy);
+    onEnd: (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      this.serviceClick(parseInt(evt.item.id), false);
+      // console.log('M', evt.originalEvent.defaultPrevented, evt, this.moreMy);
+    },
+    onUpdate: (evt) => {
+      console.log('M', evt, this.moreMy);
     },
   };
 
@@ -64,6 +65,14 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   sortEnd() {
     this.options = {disabled: true};
   }
+  moreDel(res: number) {
+    this.moreMy.splice(res, 1);
+    this.noticeNine = false;
+  }
+  moreAdd(additem: any) {
+    this.moreMy.splice(this.moreMy.length, 0, additem);
+    this.noticeFour = false;
+  }
 
   /** 更多服務按鈕增減 for #moreServiceList */
   serviceClick(code: number, action: boolean) {
@@ -72,24 +81,24 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     if (code > 0){
       // 判斷被點擊的ICON是否已經在我的服務內
       const result = this.moreMy.findIndex(item => item.Function_ID === code);
+      const add = this.moreList.filter(item => item.Function_ID === code)[0];
       if (result > -1) {
-        // 已經在我的服務內且數量>4，就將這個ICON移出我的服務
+      // 在我的服務內
         if (this.moreMy.length > 4) {
-          this.moreMy.splice(result, 1);
-          this.noticeNine = false;
+          // 數量>4
+          this.moreDel(result);
+          console.log('moreDel', code, this.moreMy.length, action);
         }
-      } else {
-        // 不在我的服務內且數量<9，就在我的服務增加這個ICON
-        if (this.moreMy.length < 9) {
-          const add = this.moreList.filter(item => item.Function_ID === code)[0];
-          if (add !== undefined) {
-            this.moreMy.splice(this.moreMy.length, 0, add);
-            this.noticeFour = false;
-          }
+      }else{
+      // 不在我的服務內
+        if (this.moreMy.length >= 4 && this.moreMy.length < 9) {
+          // 數量>=4且<9
+          this.moreAdd(add);
+          console.log('moreAdd', code, this.moreMy.length, action);
         }
       }
       this.sortClass();
-      console.log(code, this.noticeFour, this.noticeNine, this.moreMy.length);
+      return this;
     }
   }
 
