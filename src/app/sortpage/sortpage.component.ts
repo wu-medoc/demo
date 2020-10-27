@@ -29,16 +29,18 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     handle: '#myService',
     draggable: '.mysvc',
     group: '.mysvc',
-    onStart: (evt) => {
-      console.log('s', evt, evt.item.id);
+    onChoose: (evt) => {
+      evt.preventDefault();
+      // evt.stopPropagation();
+      this.sortClass();
+      console.log('S', evt.item.id, this.moreMy);
     },
     onUnchoose: (evt) => {
-      console.log('c', evt.originalEvent.returnValue, evt.item.id);
-      evt.preventDefault();
-      if (evt.originalEvent.returnValue === true){
+      if (evt.originalEvent.defaultPrevented === false){
         // tslint:disable-next-line: radix
         this.serviceClick(parseInt(evt.item.id), false);
       }
+      // console.log('M', evt, this.moreMy);
     },
   };
 
@@ -67,25 +69,27 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   serviceClick(code: number, action: boolean) {
     this.noticeNine = this.moreMy.length === 9 ? true : false;
     this.noticeFour = this.moreMy.length === 4 ? true : false;
-    // 判斷被點擊的ICON是否已經在我的服務內
-    const result = this.moreMy.findIndex(item => item.Function_ID === code);
-    if (result > -1) {
-      // 已經在我的服務內且數量>4，就將這個ICON移出我的服務
-      if (this.moreMy.length > 4) {
-        this.moreMy.splice(result, 1);
-        this.sortClass();
-        this.noticeNine = false;
-      }
-    } else {
-      // 不在我的服務內且數量<9，就在我的服務增加這個ICON
-      if (this.moreMy.length < 9) {
-        const add = this.moreList.filter(item => item.Function_ID === code)[0];
-        if (add !== undefined) {
-          this.moreMy.push(add);
-          this.sortClass();
-          this.noticeFour = false;
+    if (code > 0){
+      // 判斷被點擊的ICON是否已經在我的服務內
+      const result = this.moreMy.findIndex(item => item.Function_ID === code);
+      if (result > -1) {
+        // 已經在我的服務內且數量>4，就將這個ICON移出我的服務
+        if (this.moreMy.length > 4) {
+          this.moreMy.splice(result, 1);
+          this.noticeNine = false;
+        }
+      } else {
+        // 不在我的服務內且數量<9，就在我的服務增加這個ICON
+        if (this.moreMy.length < 9) {
+          const add = this.moreList.filter(item => item.Function_ID === code)[0];
+          if (add !== undefined) {
+            this.moreMy.splice(this.moreMy.length, 0, add);
+            this.noticeFour = false;
+          }
         }
       }
+      this.sortClass();
+      console.log(code, this.noticeFour, this.noticeNine, this.moreMy.length);
     }
   }
 
@@ -128,6 +132,7 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   // 返回鍵
   backClicked() {
     this.location.back();
+    this.sortEnd();
   }
 
   ngOnInit() {
