@@ -23,6 +23,7 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   public groupCategary = [];
   /** 我的服務-加減class(remove-item:isAdd=false, add-item:isAdd=true) */
   isAdd = false;
+  isMove = false;
   // tslint:disable-next-line: deprecation
   options: SortablejsOptions = {
     disabled: true,
@@ -32,16 +33,21 @@ export class SortpageComponent implements OnInit, AfterViewInit {
     onStart: (evt) => {
       evt.preventDefault();
       evt.stopPropagation();
-      // console.log('S', evt.item.id, this.moreMy);
+      // console.log('S', evt.item.id, evt.target);
+    },
+    onMove: (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      this.isMove = true;
+      // console.log('M', this.isMove, evt, this.moreMy);
     },
     onEnd: (evt) => {
       evt.preventDefault();
       evt.stopPropagation();
+      // tslint:disable-next-line: radix
       this.serviceClick(parseInt(evt.item.id), false);
-      // console.log('M', evt.originalEvent.defaultPrevented, evt, this.moreMy);
-    },
-    onUpdate: (evt) => {
-      console.log('M', evt, this.moreMy);
+      this.isMove = false;
+      // console.log('E', this.isMove, evt, this.moreMy);
     },
   };
 
@@ -83,11 +89,11 @@ export class SortpageComponent implements OnInit, AfterViewInit {
       const result = this.moreMy.findIndex(item => item.Function_ID === code);
       const add = this.moreList.filter(item => item.Function_ID === code)[0];
       if (result > -1) {
-      // 在我的服務內
-        if (this.moreMy.length > 4) {
+      // 在我的服務內, 且未拖曳
+        if (this.moreMy.length > 4 && this.isMove === false) {
           // 數量>4
           this.moreDel(result);
-          console.log('moreDel', code, this.moreMy.length, action);
+          // console.log('moreDel', code, this.moreMy.length, action);
         }
       }else{
       // 不在我的服務內 (action === null 代表由我的服務點選,只能移除不能增加)
@@ -95,7 +101,7 @@ export class SortpageComponent implements OnInit, AfterViewInit {
           if (this.moreMy.length >= 4 && this.moreMy.length < 9) {
             // 數量>=4且<9
             this.moreAdd(add);
-            console.log('moreAdd', code, this.moreMy.length, action);
+            // console.log('moreAdd', code, this.moreMy.length, action);
           }
         }
       }
