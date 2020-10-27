@@ -90,11 +90,13 @@ export class SortpageComponent implements OnInit, AfterViewInit {
           console.log('moreDel', code, this.moreMy.length, action);
         }
       }else{
-      // 不在我的服務內
-        if (this.moreMy.length >= 4 && this.moreMy.length < 9) {
-          // 數量>=4且<9
-          this.moreAdd(add);
-          console.log('moreAdd', code, this.moreMy.length, action);
+      // 不在我的服務內 (action === null 代表由我的服務點選,只能移除不能增加)
+        if (action !== null){
+          if (this.moreMy.length >= 4 && this.moreMy.length < 9) {
+            // 數量>=4且<9
+            this.moreAdd(add);
+            console.log('moreAdd', code, this.moreMy.length, action);
+          }
         }
       }
       this.sortClass();
