@@ -42,7 +42,8 @@
       </div>
       <div class="service-title">
         <div class="main-link edit-link sort-block" id="myService" [sortablejs]="moreMy" [sortablejsOptions]="options">
-          <div class="link-item mysvc remove-item" *ngFor="let icon of moreMy" [id]="icon.Function_ID">
+          <div class="link-item mysvc remove-item" *ngFor="let icon of moreMy" [id]="icon.Function_ID"
+          (click)="editFunction ? serviceClick(icon.Function_ID, false) : null;">
             <a [class.disabled]="editFunction ? true : false" [href]="icon.Function_URL" (click)="editFunction ? disabled($event): null;" rel="noopener noreferrer">
               <img [src]="icon.Function_Icon" alt="">
               <p>{{icon.Function_Name}}</p>
