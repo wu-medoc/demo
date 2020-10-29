@@ -144,6 +144,7 @@ export class SortpageComponent implements OnInit, AfterViewInit {
   cancelUserService(): void {
     this.editFunction = false;
     this.sortEnd();
+    this.moreMy = this.moreOg.concat();
   }
 
   // 返回鍵
