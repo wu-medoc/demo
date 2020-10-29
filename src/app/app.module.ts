@@ -12,7 +12,7 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { faSquare, faCheckSquare, faPhone, faUser as fasUser, faEnvelope as fasEnvelope, faLock, faBuilding, faEye } from '@fortawesome/free-solid-svg-icons';
 // tslint:disable-next-line: max-line-length
 import { faSquare as farSquare, faCheckSquare as farCheckSquare, faUser as farUser, faEnvelope as farEnvelope, faEyeSlash, faEye as farEye } from '@fortawesome/free-regular-svg-icons';
-import { faStackOverflow, faGithub, faMedium, faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faStackOverflow, faGithub, faMedium, faTwitter, faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 // 引用記憶體Web API(In-memory Web API)所需類別及Service
 import { HttpClientModule } from '@angular/common/http';
@@ -184,9 +184,7 @@ import { MapsComponent } from './maps/maps.component';
         providers: [
           // {
           //   id: GoogleLoginProvider.PROVIDER_ID,
-          //   provider: new GoogleLoginProvider(
-          //     'clientId'
-          //   ),
+          //   provider: new GoogleLoginProvider('260499247538-ctoucp9t09ufdpgqmd4ac368lfpgmorm.apps.googleusercontent.com'),
           // },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
@@ -210,6 +208,6 @@ export class AppModule {
   /* FontAwesome icon */
   constructor(private library: FaIconLibrary) {
     library.addIcons(faSquare, faCheckSquare, farSquare, farCheckSquare, faStackOverflow, faGithub, faMedium,
-      faTwitter, faFacebook, fasUser, farUser, farEnvelope, fasEnvelope, faPhone, faBuilding, faLock, faEye, farEye, faEyeSlash);
+      faTwitter, faFacebook, faGoogle, fasUser, farUser, farEnvelope, fasEnvelope, faPhone, faBuilding, faLock, faEye, farEye, faEyeSlash);
   }
 }

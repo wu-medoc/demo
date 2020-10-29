@@ -15,13 +15,15 @@ import {
 export class SocialComponent implements OnInit {
 
   user: SocialUser;
+  loggedIn: boolean;
   name = 'ngx sharebuttons';
 
   constructor(private authService: SocialAuthService) { }
 
   ngOnInit() {
-    this.authService.authState.subscribe(user => {
+    this.authService.authState.subscribe((user) => {
       this.user = user;
+      this.loggedIn = (user != null);
     });
   }
 
