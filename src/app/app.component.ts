@@ -1,8 +1,9 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, OnInit, Output, AfterViewInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { interfaceData } from './interfaceData';
 import { SwiperOptions } from 'swiper';
 
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
 import { slideInAnimation } from './animations';
 declare var $: any;
@@ -14,10 +15,10 @@ declare var $: any;
   animations: [ slideInAnimation ]
 })
 
-export class AppComponent {
-
+export class AppComponent implements OnInit {
+  public lazyHide = false;
   /** 列表選單 */
-  public boxTabs : SwiperOptions = {
+  public boxTabs: SwiperOptions = {
     pagination: { el: '.swiper-pagination', clickable: true },
     navigation: {
       nextEl: '.swiper-button-next',
@@ -33,6 +34,14 @@ export class AppComponent {
       1024: {
         slidesPerView: 6,
         spaceBetween: 20
+      }
+    },
+    history: {
+      replaceState: true,
+    },
+    on: {
+      slideChange: () => {
+        // get active AreaItem, get its code, and navigate on map
       }
     }
   };
@@ -52,5 +61,19 @@ export class AppComponent {
   toggleAnimations() {
     this.animationsDisabled = !this.animationsDisabled;
   }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // indexOf()返回找到的位置>0，找不到則返回-1
+        (event.url.indexOf('lazy') > 0) ? this.lazyHide = true : this.lazyHide = false;
+      }
+    });
+  }
+  ngOnInit() {
+    if (document.location.pathname.length > 0) {
+      this.boxTabs.initialSlide = this.slidestab.filter(item => item.routerLink === document.location.pathname)[0].id;
+    }
+  }
+
 }
 

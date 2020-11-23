@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+// PreloadAllModules預載
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
@@ -15,6 +16,8 @@ import { SortpageComponent } from './sortpage/sortpage.component';
 import { SocialComponent } from './social/social.component';
 import { AnimLayerComponent } from './anim-layer/anim-layer.component';
 import { MapsComponent } from './maps/maps.component';
+import { CropperComponent } from './cropper/cropper.component';
+
 
 
 const routes: Routes = [
@@ -27,13 +30,29 @@ const routes: Routes = [
   { path: 'formUI', component: formUIComponent, data: {animation: 'formUIPage'} },
   { path: 'icon', component: FontawesomeIconComponent, data: {animation: 'iconPage'} },
   { path: 'heroExp', component: HeroTestComponent, data: {animation: 'heroPage'} },
-  { path: '', pathMatch: 'full', redirectTo: 'sort' },
+  { path: 'cropper', component: CropperComponent, data: {animation: 'cropperPage'} },
+  {
+    path: 'lazy', children: [
+      {
+        path: 'customers',
+        loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule)
+      },
+      {
+        path: 'orders',
+        loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
+      },
+      { path: '', pathMatch: 'full', redirectTo: 'customers' }
+    ]
+  },
+  { path: '', pathMatch: 'full', redirectTo: 'cropper' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled'
-})],
-  exports: [RouterModule]
+    initialNavigation: 'enabled',
+    preloadingStrategy: PreloadAllModules
+  })],
+  exports: [RouterModule],
+  providers: []
 })
 export class AppRoutingModule { }

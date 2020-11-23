@@ -9,7 +9,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 // 引用FontAwesome
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSquare, faCheckSquare, faPhone, faUser as fasUser, faEnvelope as fasEnvelope, faLock, faBuilding, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faSquare, faCheckSquare, faPhone, faUser as fasUser, faEnvelope as fasEnvelope, faLock, faBuilding, faEye,
+  faChevronDown, faChevronUp, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 // tslint:disable-next-line: max-line-length
 import { faSquare as farSquare, faCheckSquare as farCheckSquare, faUser as farUser, faEnvelope as farEnvelope, faEyeSlash, faEye as farEye } from '@fortawesome/free-regular-svg-icons';
 import { faStackOverflow, faGithub, faMedium, faTwitter, faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
@@ -81,6 +82,9 @@ import { HighlightDirective } from './highlight.directive';
 import { SocialComponent } from './social/social.component';
 import { SortpageComponent } from './sortpage/sortpage.component';
 import { MapsComponent } from './maps/maps.component';
+import { LazyloadComponent } from './lazyload/lazyload.component';
+import { CropperComponent } from './cropper/cropper.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 @NgModule({
@@ -128,6 +132,8 @@ import { MapsComponent } from './maps/maps.component';
     SocialComponent,
     SortpageComponent,
     MapsComponent,
+    LazyloadComponent,
+    CropperComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -175,6 +181,7 @@ import { MapsComponent } from './maps/maps.component';
       language: 'zh-TW'
     }),
     SortablejsModule,
+    ImageCropperModule
   ],
   providers: [
     {
@@ -208,6 +215,7 @@ export class AppModule {
   /* FontAwesome icon */
   constructor(private library: FaIconLibrary) {
     library.addIcons(faSquare, faCheckSquare, farSquare, farCheckSquare, faStackOverflow, faGithub, faMedium,
+      faChevronDown, faChevronUp, faChevronRight, faChevronLeft,
       faTwitter, faFacebook, faGoogle, fasUser, farUser, farEnvelope, fasEnvelope, faPhone, faBuilding, faLock, faEye, farEye, faEyeSlash);
   }
 }
