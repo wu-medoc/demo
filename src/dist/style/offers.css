@@ -1,11 +1,28 @@
 @charset "UTF-8";
+#clock {
+  font-size: small;
+}
+
 #clock .item-time {
   background: #182B56;
   border-radius: .25em;
   color: #fff;
   padding: 2px 4px;
   margin: 1px;
-  font-size: small;
+}
+
+#time-hours,
+#time-minutes,
+#time-seconds {
+  background-color: #13334C;
+  border-radius: 5px;
+  color: #fff;
+  padding: 2px 4px;
+  margin: 1px;
+}
+
+button.btn {
+  white-space: nowrap;
 }
 
 .rwdimg.logo-img {
@@ -93,6 +110,12 @@
   position: relative;
   padding: 10px;
   padding-right: 0;
+  min-width: 75px;
+  text-align: center;
+}
+
+.other-discount-list .discount-item .item:last-child button {
+  min-width: 65px;
 }
 
 .other-discount-list .discount-item .item:last-child .line-box {
@@ -172,6 +195,7 @@
 }
 
 .other-discount-list .discount-item .discount-text {
+  width: auto;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -184,6 +208,57 @@
           justify-content: center;
   color: #182B56;
   font-size: .9em;
+}
+
+@media (max-width: 570px) {
+  .other-discount-list .discount-item .discount-text {
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 480px) {
+  .other-discount-list .discount-item .discount-text {
+    max-width: 235px;
+  }
+}
+
+@media (max-width: 375px) {
+  .other-discount-list .discount-item .discount-text {
+    max-width: 170px;
+  }
+}
+
+@media (max-width: 320px) {
+  .other-discount-list .discount-item .discount-text {
+    max-width: 130px;
+  }
+}
+
+@media (min-width: 768px) {
+  .other-discount-list .discount-item .discount-text {
+    max-width: 160px;
+  }
+}
+
+@media (min-width: 992px) {
+  .other-discount-list .discount-item .discount-text {
+    max-width: 280px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .other-discount-list .discount-item .discount-text {
+    max-width: 360px;
+  }
+}
+
+.other-discount-list .discount-item .discount-text p {
+  max-height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .other-discount-list .discount-item .discount-text p:first-child {
@@ -241,7 +316,7 @@
   position: absolute;
   width: 100%;
   bottom: -13px;
-  background-image: url("../../img/member/circle.svg");
+  background-image: url("https://wu-medoc.github.io/eyesmedia_afp/img/member/circle.svg");
   background-repeat: repeat-x;
 }
 
@@ -302,5 +377,37 @@
   background-color: #fff;
   -webkit-box-shadow: 0 -5px 8px rgba(0, 0, 0, 0.2);
           box-shadow: 0 -5px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* progress */
+.card-text .offers-progress {
+  border-radius: 5em;
+  background: #FFCFB3;
+}
+
+.card-text .offers-progress .progress-bar {
+  background: #FD5F00;
+}
+
+.card-text .offers-progress .offers-progress-txt {
+  color: white;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  left: 0;
+}
+
+.card-text.unable .offers-progress {
+  background: #8E8E93;
+}
+
+.card-text.unable .offers-progress .progress-bar {
+  background: #8E8E93;
 }
 /*# sourceMappingURL=offers.css.map */

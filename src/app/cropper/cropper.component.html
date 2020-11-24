@@ -1,5 +1,23 @@
-<input type="file" (change)="fileChangeEvent($event)" />
-<button type="button" class="btn bluedk-btn float-right" (click)='cropperOk()' *ngIf="isCropper">cropper</button>
+<div class="row">
+  <div class="col-6">
+    <label for="fileCropper" class="custom-file-upload w-100">
+      <div class="upload-box">
+        <div class="add-btn uploadItembox">
+          <div class="uploadItem">
+            <div class="btn bluedk-btn float-right">上傳照片</div>
+          </div>
+        </div>
+      </div>
+    </label>
+  </div>
+  <div class="col-6">
+    <input id="fileCropper" type="file" (change)="fileChangeEvent($event)" />
+    <button type="button" class="btn bluedk-btn float-right mx-1" (click)='cropperOk()' *ngIf="isCropper">cropper</button>
+    <button type="button" class="btn bluedk-btn float-right" (click)='refresh()' *ngIf="isRefresh">重設</button>
+  </div>
+</div>
+<!-- <input type="file" (change)="fileChangeEvent($event)" />
+<button type="button" class="btn bluedk-btn float-right" (click)='cropperOk()' *ngIf="isCropper">cropper</button> -->
 <div>
     <image-cropper *ngIf="isCropper"
         [imageChangedEvent]="imageChangedEvent"

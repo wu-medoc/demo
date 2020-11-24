@@ -1,14 +1,24 @@
 @charset "UTF-8";
-.mymember {
-  background: #FD5F00;
+ul {
+  padding: 0;
 }
 
 .title-box button.btn {
   color: #182B56;
 }
 
+.w-84 {
+  width: 87px;
+  line-height: initial;
+}
+
+@media (min-width: 376px) {
+  .w-84 {
+    white-space: nowrap;
+  }
+}
+
 .member-top-box {
-  position: relative;
   background: #FD5F00;
 }
 
@@ -26,7 +36,7 @@
   width: 80%;
   max-width: 500px;
   margin: 0 auto;
-  padding: 1em;
+  padding: 0 1em 1em 1em;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -49,8 +59,21 @@
 
 .member-top-box .member-info-box .info-item.info-name {
   width: auto;
+  max-width: 250px;
   font-size: 18px;
   font-weight: 700;
+}
+
+@media (max-width: 767px) {
+  .member-top-box .member-info-box .info-item.info-name {
+    width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .member-top-box .member-info-box .info-item.info-name {
+    width: 120px;
+  }
 }
 
 @media (max-width: 375px) {
@@ -96,8 +119,11 @@
   height: 24px;
 }
 
+.mycard {
+  margin-bottom: 80px;
+}
+
 .member-item-group {
-  position: relative;
   background-color: #fff;
 }
 
@@ -113,6 +139,23 @@
 .member-item-group .mycard-box .mycard-img {
   position: relative;
   width: 100%;
+}
+
+.member-item-group .mycard-box .uploadphoto {
+  width: 64px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  -webkit-transform: translate(-31%, -50%);
+          transform: translate(-31%, -50%);
+}
+
+@media (max-width: 480px) {
+  .member-item-group .mycard-box .uploadphoto {
+    width: 48px;
+    -webkit-transform: translate(-22%, -50%);
+            transform: translate(-22%, -50%);
+  }
 }
 
 .member-item-group .mycard-box .mycard-info {
@@ -152,6 +195,8 @@
 }
 
 .member-item-group .mycard-box .mycard-info .info-bc {
+  width: 66%;
+  max-width: 330px;
   color: #fff;
   position: absolute;
   text-align: left;
@@ -162,6 +207,8 @@
 
 @media (max-width: 375px) {
   .member-item-group .mycard-box .mycard-info .info-bc {
+    width: 66%;
+    max-width: 168px;
     font-size: 1em;
     top: 45%;
   }
@@ -212,13 +259,12 @@
 
 .member-item-group .member-item-bg {
   width: 100%;
-  height: 100px;
-  background: #FD5F00;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(15%, #FD5F00), color-stop(0, #fff));
+  background: linear-gradient(#FD5F00 15%, #fff 0);
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/$member-default+0,ffffff+100&1+0,0+100 */
 }
 
 .member-item-group .member-item-list {
-  position: relative;
   z-index: 50;
   padding: 0 15px;
   background-color: #fff;
@@ -233,7 +279,7 @@
   display: flex;
 }
 
-.member-item-group .member-item-list .member-items:first-child {
+.member-item-group .member-item-list .member-items:not(:last-child) {
   border-bottom: 1px #eee solid;
 }
 
@@ -243,7 +289,7 @@
           flex: 1;
   text-align: center;
   padding: 15px 10px;
-  color: #333;
+  color: #182B56;
 }
 
 .member-item-group .member-item-list .member-items .member-item p {
@@ -260,8 +306,28 @@
   margin-bottom: 5px;
 }
 
+.title-box {
+  min-width: 320px;
+}
+
 .my-list-box {
+  /* Chrome, Safari, Edge, Opera */
+  /* Firefox */
   border-top: 1px #eee solid;
+}
+
+.my-list-box input::-webkit-outer-spin-button,
+.my-list-box input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  border: 0;
+  text-align: right;
+}
+
+.my-list-box input[type=number] {
+  -moz-appearance: textfield;
+  border: 0;
+  text-align: right;
 }
 
 .my-list-box.edit-list ul li {
@@ -274,15 +340,52 @@
           flex: 1;
 }
 
-.my-list-box.edit-list ul li .item:last-child {
+.my-list-box.edit-list ul li .item.auto-left:last-child {
   -webkit-box-flex: 0;
       -ms-flex: none;
           flex: none;
   width: 30px;
 }
 
-.my-list-box.edit-list ul li .item:last-child .material-icons {
+.my-list-box.edit-list ul li .item.auto-left:last-child .material-icons {
   color: #8E8E93;
+}
+
+.my-list-box.cardbox {
+  height: 100%;
+  background: #f8f8f8;
+  min-width: 320px;
+}
+
+.my-list-box.cardbox ul {
+  background: #fff;
+}
+
+.my-list-box.cardbox ul li.small-end {
+  padding: 5px 15px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  font-size: small;
+  background: #f8f8f8;
+}
+
+.my-list-box.cardbox ul li.captchabox {
+  padding: 5px 15px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  background: #f8f8f8;
+}
+
+.my-list-box.cardbox ul li.captchabox button {
+  color: #FD5F00;
+}
+
+.my-list-box.cardbox ul li.captchabox .captnote {
+  padding-right: 120px;
+  -webkit-transform: translate(0%, -50%);
+          transform: translate(0%, -50%);
 }
 
 .my-list-box p {
@@ -325,6 +428,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -332,10 +438,16 @@
   border-bottom: 1px #eee solid;
 }
 
+.my-list-box ul li small.text-danger {
+  position: absolute;
+  -webkit-transform: translate(-18%, 99%);
+          transform: translate(-18%, 99%);
+}
+
 .my-list-box ul li .input-box {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
   text-align: right;
 }
 
@@ -344,18 +456,92 @@
 .my-list-box ul li .input-box input[type='email'],
 .my-list-box ul li .input-box input[type='text'] {
   background-color: #fff;
-  width: 100%;
   border: 0;
   text-align: right;
   color: #182B56;
 }
 
+.my-list-box ul li .input-box input[type='date'].text-a8,
+.my-list-box ul li .input-box input[type='tel'].text-a8,
+.my-list-box ul li .input-box input[type='email'].text-a8,
+.my-list-box ul li .input-box input[type='text'].text-a8 {
+  color: #a8a8a8a8;
+}
+
+.my-list-box ul li .input-box input[type='tel'],
+.my-list-box ul li .input-box input[type='email'],
+.my-list-box ul li .input-box input[type='text'] {
+  width: 100%;
+}
+
+.my-list-box ul li .input-box input[type='date'] {
+  width: 110px;
+}
+
+.my-list-box ul li .input-box input#bdayinput {
+  padding: 0;
+  height: auto;
+  width: calc(100% - 38px);
+}
+
+.my-list-box ul li .input-box .icon-birth {
+  width: 26px;
+  height: 26px;
+}
+
+.my-list-box ul li .input-box input[type=date]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  display: none;
+}
+
+.my-list-box ul li .input-box input[type=date]::-webkit-calendar-picker-indicator {
+  -webkit-appearance: none;
+  display: none;
+}
+
 .my-list-box ul li button {
   color: #182B56;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .my-list-box ul.p-select-wheel > li {
   border-bottom: 0px;
+}
+
+.uplayer > div.mycardprompt {
+  overflow: hidden;
+  max-height: 82vh;
+  padding-bottom: 60px;
+}
+
+@media (min-width: 768px) {
+  .uplayer > div.mycardprompt {
+    max-height: 65vh;
+  }
+}
+
+.cardnum-title {
+  text-align: center;
+  background: #f8f8f8;
+  padding: .5em;
+}
+
+.cardnum {
+  padding: 1em;
+  text-align: center;
+  color: #FD5F00;
+}
+
+.cardnum img {
+  width: 300px;
+}
+
+@media (max-width: 480px) {
+  .cardnum img {
+    width: 200px;
+  }
 }
 
 .my-info-box {
@@ -372,7 +558,8 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 30px 15px;
+  padding-right: 1em;
+  padding-left: 1em;
   border-top: 1px #eee solid;
   border-bottom: 1px #eee solid;
 }
@@ -384,7 +571,7 @@
 
 .my-info-box .passport-status {
   margin-top: -6px;
-  color: #8E8E93;
+  color: #FD5F00;
 }
 
 .my-info-box .passport-status .material-icons {
@@ -433,6 +620,26 @@
           transform: translate(-50%, -50%);
 }
 
+.upload-box .add-btn.uploadItembox, .upload-box .change-btn.uploadItembox {
+  position: relative;
+  top: 0;
+  left: 0;
+  -webkit-transform: none;
+          transform: none;
+}
+
+.upload-box .add-btn.uploadItembox .uploadItem, .upload-box .change-btn.uploadItembox .uploadItem {
+  position: relative;
+  width: 100%;
+  min-width: 260px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .upload-box .change-btn {
   width: 60px;
   height: 60px;
@@ -456,8 +663,14 @@
   width: 130px;
 }
 
+@media (min-width: 768px) {
+  .upload-box .add-btnbg {
+    width: 200px;
+  }
+}
+
 .upload-passport-noti {
-  height: calc(100vh - 54px);
+  height: calc(100vh - 100px);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -474,6 +687,16 @@
 
 .upload-passport-noti .img-box {
   margin: auto;
+}
+
+.upload-passport-noti .nextBtnFixed {
+  position: fixed;
+  width: 75%;
+  bottom: 0;
+  margin-bottom: 1em;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 input[type="file"] {
@@ -536,14 +759,12 @@ input[type="file"] {
   border-radius: 30px !important;
 }
 
-.passport-pic-status .btn-group .outline-btn {
-  border-color: #FD5F00;
-  color: #FD5F00;
-}
-
 .my-phone-list {
-  padding: 1em;
+  padding-right: 1em;
+  padding-left: 1em;
   text-align: center;
+  /* Chrome, Safari, Edge, Opera */
+  /* Firefox */
 }
 
 .my-phone-list .form-control {
@@ -558,6 +779,16 @@ input[type="file"] {
   background-size: 58px 1px;
   background-repeat: repeat-x;
   margin: 0 auto;
+}
+
+.my-phone-list input::-webkit-outer-spin-button,
+.my-phone-list input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.my-phone-list input[type=number] {
+  -moz-appearance: textfield;
 }
 
 .my-phone-list input {
@@ -577,8 +808,20 @@ input[type="file"] {
   text-align: left;
 }
 
+.my-address-list {
+  color: #182B56;
+}
+
+.my-address-list.L2height {
+  line-height: 2em;
+}
+
+.my-address-list .distdefault, .my-address-list .citydefault {
+  color: #2796DF;
+}
+
 .my-address-list ul li {
-  padding: 15px;
+  padding: 10px 15px;
   border-bottom: 1px #eee solid;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -592,19 +835,25 @@ input[type="file"] {
   border-top: 1px #eee solid;
 }
 
-.my-address-list ul li .item.w-84 {
-  width: auto;
-}
-
-@media screen and (max-width: 570px) {
-  .my-address-list ul li .item.w-84 {
-    width: 84px;
-  }
-}
-
 .my-address-list ul li .item.default-item p {
   color: #FD5F00;
   margin-top: -10px;
+}
+
+.my-address-list ul li .item.foodstatus {
+  font-size: .95em;
+}
+
+.my-address-list ul li .item.foodstatus p {
+  color: #8E8E93;
+}
+
+.my-address-list ul li .item.foodstatus.active p {
+  color: #FD5F00;
+}
+
+.my-address-list ul li .item.foodstatus.error p {
+  color: #C10E24;
 }
 
 .my-address-list ul li p {
@@ -631,7 +880,6 @@ input[type="file"] {
   border: none;
   text-align: right;
   color: #182B56;
-  border-bottom: 1px #eee solid;
 }
 
 .my-address-list .add-address-btn {
@@ -644,6 +892,14 @@ input[type="file"] {
 .my-address-list .material-icons {
   font-size: 18px;
   vertical-align: sub;
+}
+
+.my-address-list label.radio-box {
+  line-height: initial;
+}
+
+.multilayer .my-address-list ul li {
+  line-height: 2em;
 }
 
 .my-creditcard-list .main-list {
@@ -819,14 +1075,6 @@ input[type="file"] {
   position: relative;
 }
 
-.change-password-list ul li.is-open .material-icons.visibility {
-  display: none;
-}
-
-.change-password-list ul li.is-open .material-icons.visibility-off {
-  display: block;
-}
-
 .change-password-list ul li input {
   width: 100%;
   border: none;
@@ -846,14 +1094,6 @@ input[type="file"] {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   color: rgba(24, 43, 86, 0.5);
-}
-
-.change-password-list ul li .material-icons.visibility-off {
-  display: block;
-}
-
-.change-password-list ul li .password-item.toggle-visibility .material-icons.visibility-off {
-  display: none;
 }
 
 .discount-card .item-img {
@@ -1061,7 +1301,7 @@ input[type="file"] {
   position: absolute;
   width: 100%;
   bottom: -13px;
-  background-image: url("../../img/member/circle.svg");
+  background-image: url("https://wu-medoc.github.io/eyesmedia_afp/img/member/circle.svg");
   background-repeat: repeat-x;
 }
 
@@ -1139,7 +1379,7 @@ input[type="file"] {
   left: 80%;
 }
 
-.toTop-arrow::before, .toTop-arrow::after {
+.toTop-arrow::before, .toTop-arrow:after {
   width: 18px;
   height: 5px;
   border-radius: 3px;
@@ -1155,7 +1395,7 @@ input[type="file"] {
   left: 0.5rem;
 }
 
-.toTop-arrow::after {
+.toTop-arrow:after {
   -webkit-transform: rotate(45deg) translate(0, -50%);
           transform: rotate(45deg) translate(0, -50%);
   right: 0.5rem;
@@ -1202,39 +1442,10 @@ input[type="file"] {
 
 .auto-left {
   margin-left: auto;
-  text-align: right;
-  right: 10px;
-  position: absolute;
 }
 
 #open-mask.modal-backdrop {
   z-index: 1040;
-}
-
-.outline-btn {
-  border-color: #FD5F00;
-  color: #FD5F00;
-}
-
-.member-body {
-  padding: .5em;
-  text-align: justify;
-  text-justify: auto;
-  position: inherit;
-}
-
-.member-body ul {
-  padding: .5em 0 .25em 0;
-  font-weight: 700;
-}
-
-.member-body li {
-  font-weight: 400;
-}
-
-.member-body h6 {
-  padding: .5em 0 .25em 0;
-  font-weight: 700;
 }
 
 .coin-box {
@@ -1272,6 +1483,7 @@ input[type="file"] {
   background-image: none;
   border-color: #fff;
   border-radius: 30px;
+  white-space: nowrap;
 }
 
 .rwdimg.logo-img {
@@ -1284,6 +1496,17 @@ input[type="file"] {
     width: 60px;
     height: 60px;
   }
+}
+
+/* member_coin bg */
+.lineargradient-purple {
+  background: -webkit-gradient(linear, left top, left bottom, from(#7787FE), to(#70B8FE));
+  background: linear-gradient(to bottom, #7787FE, #70B8FE);
+}
+
+.lineargradient-blue {
+  background: -webkit-gradient(linear, left top, right bottom, from(#36D1DB), to(#568EE3));
+  background: linear-gradient(to bottom right, #36D1DB, #568EE3);
 }
 
 .w-10 {
@@ -1353,6 +1576,10 @@ input[type="file"] {
 
 .wait-pay-list .item-type p:last-child {
   margin-top: auto;
+}
+
+.wait-pay-list .item-type p.text-org {
+  color: #FD5F00;
 }
 
 .order-status {
@@ -1442,7 +1669,7 @@ input[type="file"] {
   color: #FD5F00;
 }
 
-.return-box .reason-list li.active::after {
+.return-box .reason-list li.active:after {
   content: "✔";
   float: right;
 }
@@ -1450,5 +1677,118 @@ input[type="file"] {
 .returnInfo p {
   font-size: small;
   padding: 1em;
+}
+
+.faq-content {
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: -1;
+  color: #182B56;
+}
+
+.faq-content ul.decimal {
+  list-style-type: decimal;
+  padding-left: 1.5em;
+}
+
+.receiptiframe {
+  width: 100%;
+  min-height: 400px;
+}
+
+@media (min-width: 480px) {
+  .receiptiframe {
+    min-height: 680px;
+  }
+}
+
+/* member private & clause */
+.memberprivate-box,
+.memberclause-box {
+  display: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+  height: 95%;
+  padding: 0;
+  position: absolute;
+  background-color: #fff;
+  z-index: 1050;
+  border-radius: .5rem;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 5%);
+  -webkit-transform: translate(-50%, 5%);
+}
+
+.memberprivate-box .member-title,
+.memberclause-box .member-title {
+  background-color: #f8f9fa;
+}
+
+.memberprivate-box .member-body,
+.memberclause-box .member-body {
+  padding: .5em;
+  text-align: justify;
+  text-justify: auto;
+}
+
+.memberprivate-box .member-body ul,
+.memberclause-box .member-body ul {
+  padding: .5em 0;
+}
+
+.order-tabSubox {
+  padding: 1em;
+  overflow: hidden;
+}
+
+.order-tabSubox .nav-tabSub {
+  text-align: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.order-tabSubox .nav-tabSub li a.tabsub-link {
+  display: inline-block;
+  border-radius: 30px;
+  padding: .25em 1.25em;
+  color: #939598;
+  font-size: 90%;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.order-tabSubox .nav-tabSub li a.tabsub-link.active {
+  color: #FD5F00;
+  background: #FFF6E6;
+  font-weight: 600;
+}
+
+/* products on-sale control */
+.brightness:before {
+  color: #fff;
+  content: '已下架';
+  display: block;
+  position: absolute;
+  left: inherit;
+  -webkit-transform: translate(50%, 150%);
+          transform: translate(50%, 150%);
+  z-index: 1;
+}
+
+.brightness .img-box {
+  -webkit-filter: brightness(0.4);
+          filter: brightness(0.4);
+}
+
+.brightness ul {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  opacity: .45;
 }
 /*# sourceMappingURL=member.css.map */

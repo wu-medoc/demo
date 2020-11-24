@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,QAAQ,AAAA,CACJ,QAAQ,CAAE,QAAQ,CAClB,UAAU,CAAE,MAAM,CAClB,UAAU,CAAE,GAAG,CAOlB,AANG,MAAM,EAAE,SAAS,EAAE,KAAK,EAJ5B,AAAA,QAAQ,AAAA,CAKA,QAAQ,CAAE,QAAQ,CAClB,IAAI,CAAE,GAAG,CACT,MAAM,CAAE,GAAG,CACX,SAAS,CAAE,gBAAgB,CAElC,CACD,AAAA,UAAU,AAAA,CACN,YAAY,CAAE,IAAI,CAClB,KAAK,CCGO,OAAO,CDFtB,AACD,AAAA,UAAU,AAAA,CACN,SAAS,CAAE,KAAK,CACnB",
+    "sources": [
+        "../scss/ridecode.scss",
+        "module/_variable.scss"
+    ],
+    "names": [],
+    "file": "ridecode.min.css"
+}

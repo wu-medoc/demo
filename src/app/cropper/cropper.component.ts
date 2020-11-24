@@ -4,18 +4,21 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 @Component({
   selector: 'app-cropper',
   templateUrl: './cropper.component.html',
-  styleUrls: ['./cropper.component.css'],
+  styleUrls: ['../../dist/style/member.min.css', './cropper.component.css'],
 })
 export class CropperComponent implements OnInit {
   imageChangedEvent: any;
   isCropper = false;
+  isRefresh = false;
   croppedImage: any = 'https://wu-medoc.github.io/demo/img/share/oopsarea.png';
   ngOnInit(){
     console.log(this);
   }
   fileChangeEvent(event: any): void {
-    this.imageChangedEvent = event;
     this.isCropper = true;
+    this.isRefresh = true;
+    this.imageChangedEvent = event;
+    console.log(event);
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
@@ -29,5 +32,7 @@ export class CropperComponent implements OnInit {
   cropperOk() {
     this.isCropper = false;
   }
-
+  refresh(): void {
+    window.location.reload();
+  }
 }
