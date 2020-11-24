@@ -1,17 +1,15 @@
 <input type="file" (change)="fileChangeEvent($event)" />
-
+<button type="button" class="btn bluedk-btn float-right" (click)='cropperOk()' *ngIf="isCropper">cropper</button>
 <div>
-    <image-cropper
+    <image-cropper *ngIf="isCropper"
         [imageChangedEvent]="imageChangedEvent"
         [maintainAspectRatio]="true"
         [aspectRatio]="1 / 1"
         [resizeToWidth]="256"
         [cropperMinWidth]="128"
-        [onlyScaleDown]="true"
-        [roundCropper]="false"
         [alignImage]="'left'"
-        format="png"
         (imageCropped)="imageCropped($event)"
+        (cropperReady)="cropperReady()"
         (loadImageFailed)="loadImageFailed()"
     ></image-cropper>
 </div>

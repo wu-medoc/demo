@@ -1,26 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-cropper',
   templateUrl: './cropper.component.html',
-  styleUrls: ['./cropper.component.scss'],
+  styleUrls: ['./cropper.component.css'],
 })
 export class CropperComponent implements OnInit {
-  // tslint:disable-next-line: member-ordering
-  imageChangedEvent: any = '';
-  croppedImage: any = '../../img/share/oopsarea.png';
+  imageChangedEvent: any;
+  isCropper = false;
+  croppedImage: any = 'https://wu-medoc.github.io/demo/img/share/oopsarea.png';
   ngOnInit(){
+    console.log(this);
   }
-
   fileChangeEvent(event: any): void {
-      this.imageChangedEvent = event;
+    this.imageChangedEvent = event;
+    this.isCropper = true;
   }
   imageCropped(event: ImageCroppedEvent) {
-      this.croppedImage = event.base64;
-  }
-  imageLoaded(image: HTMLImageElement) {
-      // show cropper
+    this.croppedImage = event.base64;
   }
   cropperReady() {
       // cropper ready
@@ -28,4 +26,8 @@ export class CropperComponent implements OnInit {
   loadImageFailed() {
       // show message
   }
+  cropperOk() {
+    this.isCropper = false;
+  }
+
 }

@@ -23,6 +23,10 @@ body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
+*::-ms-clear,*::-ms-reveal
+{
+  display:none;
+}
 
 // scroll ui
 ::-webkit-scrollbar-track {
@@ -55,7 +59,6 @@ body {
   }
 }
 
-
 // 手機版顯示
 .for-mobile {
   display: none;
@@ -64,8 +67,8 @@ body {
   }
 }
 
-
 .wrap {  
+  position: relative;
   min-width: 320px;
   height: 100%;
   margin-right: auto;
@@ -103,7 +106,9 @@ body {
   z-index: 500;
   display: none;
 }
-
+img.source-image + .overlay{
+  background-color: none;
+}
 
 //全站共用標籤
 div, span, object, iframe, img, table, caption, thead, tbody,
@@ -183,6 +188,21 @@ ul, ol {
   list-style: none;
   padding-left: 0;
   padding-right: 0;
+}
+
+.abox{
+  ul{
+      list-style: disc
+  }
+  ol{
+      list-style: decimal
+  }
+  ul, ol{
+    padding: inherit;
+  }
+  p{
+      line-height: 2em;
+  }
 }
 
 :focus {
@@ -285,7 +305,6 @@ ul, ol {
         }
       }
       & + label {
-        font-size: 14px;
         line-height: 21px;
         display: inline-block;
         vertical-align: top;
@@ -294,6 +313,10 @@ ul, ol {
       }
     }
     input[type='checkbox'] {
+      &.icheckBgOrg{
+      --active: #FD5F00;
+      --border-hover: #FD5F00;
+      }
       &:not(.switch) {
         border-radius: 7px;
         &:after {
@@ -359,7 +382,6 @@ ul, ol {
   align-items: center;
   justify-content: space-between;
   padding: 15px;
-
   .item {
       min-width: 30px;
       text-align: center;
@@ -415,14 +437,24 @@ footer.for-mobile {
   width: 101%;  
   min-width: 320px;
   left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
   bottom: 0;
   z-index: 300;
   background-color: #fff;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  -webkit-transform: translateZ(0);
+  -o-transform: translate3d(-50%, 0, 0);
+  -webkit-transform: translate3d(-50%, 0, 0);
+  -moz-transform: translate3d(-50%, 0, 0);
+  -ms-transform: translate3d(-50%, 0, 0);
+  transform: translate3d(-50%, 0, 0);
+  // transform: translateZ(0);
+  // -webkit-transform: translateZ(0);
+  @media (max-width: 767px) {
+    height: 79px;
+  }
+  @media (max-width: 375px) {
+    height: 63px;
+  }
 }
 
 footer.for-pc{
@@ -434,6 +466,7 @@ footer.for-pc{
   display: inline-block;
   bottom: 0;
   clear:both;
+  height: 170px;
   @media (max-width: 767px) {
     display: none;
   }

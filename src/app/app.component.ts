@@ -72,7 +72,11 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (document.location.pathname.length > 0) {
       this.boxTabs.initialSlide = this.slidestab.filter(item => item.routerLink === document.location.pathname)[0].id;
+      if (this.boxTabs.initialSlide === 1){
+        this.boxTabs.initialSlide = 0;
+      }
     }
+    console.log(document.location.pathname + ' | ' +  this.boxTabs.initialSlide);
   }
 
 }

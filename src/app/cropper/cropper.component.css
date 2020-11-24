@@ -1,0 +1,7 @@
+img {
+  max-width: -webkit-fill-available;
+}
+img.source-image + .overlay{
+  opacity: 0;
+  background-color: none;
+}
