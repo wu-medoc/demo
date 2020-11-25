@@ -39,13 +39,12 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 // Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-// google maps
-import { AgmCoreModule } from '@agm/core';
-import { GoogleMapsAPIWrapper} from '@agm/core';
-import { MarkersService } from './maps/markers.service';
-
 // SortablejsModule
 import { SortablejsModule } from 'ngx-sortablejs';
+
+// google maps Agm
+import { GoogleMapsAPIWrapper} from '@agm/core';
+import { MarkersService } from './maps/markers.service';
 
 // Component
 import { AppComponent } from './app.component';
@@ -131,7 +130,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     HighlightDirective,
     SocialComponent,
     SortpageComponent,
-    MapsComponent,
     LazyloadComponent,
     CropperComponent,
   ],
@@ -176,10 +174,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
       debug: true
     }),
     ShareIconsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB0XQBqNsHt-g1VJEqVCrW7uG0tpMMS9sc',
-      language: 'zh-TW'
-    }),
     SortablejsModule,
     ImageCropperModule
   ],

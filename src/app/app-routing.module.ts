@@ -23,7 +23,7 @@ import { CropperComponent } from './cropper/cropper.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent, data: {animation: 'homePage'} },
   { path: 'social', component: SocialComponent, data: {animation: 'socialPage'} },
-  { path: 'maps', component: MapsComponent, data: {animation: 'mapsPage'} },
+  { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule)},
   { path: 'sort', component: SortpageComponent, data: {animation: 'sortPage'} },
   { path: 'swiperDemo', component: swiperDemoComponent, data: {animation: 'swiperDemoPage'} },
   { path: 'animLayer', component: AnimLayerComponent, data: {animation: 'animLayerPage'} },
